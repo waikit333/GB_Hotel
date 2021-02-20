@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/homesidemenu"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/icon_material_account_circle"
+            android:title="@string/menu_profile" />
+    </group>
+
+    <item
+        android:title="@string/menu_booking">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_booking"
+                    android:icon="@drawable/bookingsidemenu"
+                    android:title="@string/menu_booking" />
+                <item
+                    android:id="@+id/nav_addNewbooking"
+                    android:title="@string/menu_addNewBooking" />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:title="@string/menu_checkInOut">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_checkInOut"
+                    android:icon="@drawable/checkin_checkoutsidemenu"
+                    android:title="@string/menu_checkInOut" />
+                <item
+                    android:id="@+id/nav_checkIn"
+                    android:title="@string/menu_checkIn" />
+                <item
+                    android:id="@+id/nav_checkOut"
+                    android:title="@string/menu_checkOut" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_roomManagement">
+        <menu>
+            <item
+                android:id="@+id/nav_roomManagement"
+                android:icon="@drawable/roommanagementsidebar"
+                android:title="@string/menu_roomManagement" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_roomService">
+        <menu>
+            <item
+            android:id="@+id/nav_roomService"
+            android:icon="@drawable/roomservicesidemenu"
+            android:title="@string/menu_roomService" />
+        </menu>
+    </item>
+
+    <item
+        android:title="@string/menu_staff">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_staff"
+                    android:icon="@drawable/staffsidemenu"
+                    android:title="@string/menu_staff" />
+                <item
+                    android:id="@+id/nav_addNewStaff"
+                    android:title="@string/menu_addNewStaff" />
+                <item
+                    android:id="@+id/nav_editStaff"
+                    android:title="@string/menu_editStaff" />
+            </group>
+        </menu>
+    </item>
+</menu>
