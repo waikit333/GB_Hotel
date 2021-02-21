@@ -7,78 +7,78 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/homesidemenu"
-            android:title="@string/menu_home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/icon_material_account_circle"
-            android:title="@string/menu_profile" />
+            android:title="@string/profile" />
     </group>
 
     <item
-        android:title="@string/menu_booking">
+        android:title="@string/booking">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_booking"
                     android:icon="@drawable/bookingsidemenu"
-                    android:title="@string/menu_booking" />
+                    android:title="@string/booking" />
                 <item
                     android:id="@+id/nav_addNewbooking"
-                    android:title="@string/menu_addNewBooking" />
+                    android:title="@string/addNewBooking" />
             </group>
         </menu>
     </item>
 
     <item
-        android:title="@string/menu_checkInOut">
+        android:title="@string/check_in_check_out">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_checkInOut"
                     android:icon="@drawable/checkin_checkoutsidemenu"
-                    android:title="@string/menu_checkInOut" />
+                    android:title="@string/check_in_check_out" />
                 <item
                     android:id="@+id/nav_checkIn"
-                    android:title="@string/menu_checkIn" />
+                    android:title="@string/check_in" />
                 <item
                     android:id="@+id/nav_checkOut"
-                    android:title="@string/menu_checkOut" />
+                    android:title="@string/check_out" />
             </group>
         </menu>
     </item>
 
-    <item android:title="@string/menu_roomManagement">
+    <item android:title="@string/roomManagement">
         <menu>
             <item
                 android:id="@+id/nav_roomManagement"
                 android:icon="@drawable/roommanagementsidebar"
-                android:title="@string/menu_roomManagement" />
+                android:title="@string/roomManagement" />
         </menu>
     </item>
 
-    <item android:title="@string/menu_roomService">
+    <item android:title="@string/roomService">
         <menu>
             <item
             android:id="@+id/nav_roomService"
             android:icon="@drawable/roomservicesidemenu"
-            android:title="@string/menu_roomService" />
+            android:title="@string/roomService" />
         </menu>
     </item>
 
     <item
-        android:title="@string/menu_staff">
+        android:title="@string/staff">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_staff"
                     android:icon="@drawable/staffsidemenu"
-                    android:title="@string/menu_staff" />
+                    android:title="@string/staff" />
                 <item
                     android:id="@+id/nav_addNewStaff"
-                    android:title="@string/menu_addNewStaff" />
+                    android:title="@string/addNewStaff" />
                 <item
                     android:id="@+id/nav_editStaff"
-                    android:title="@string/menu_editStaff" />
+                    android:title="@string/editStaff" />
             </group>
         </menu>
     </item>
