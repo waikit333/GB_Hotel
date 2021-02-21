@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">Golden Beach Hotel Management System</string>
+    <string name="header">header</string>
+    <string name="back_button">back_button</string>
     <string name="hotel_name">Golden Beach Hotel</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_booking">Booking</string>
-    <string name="menu_profile">Profile</string>
-    <string name="menu_addNewBooking">Add New Booking</string>
-    <string name="menu_checkInOut">Check in /Check Out</string>
-    <string name="menu_checkIn">Check in</string>
-    <string name="menu_checkOut">Check Out</string>
-    <string name="menu_roomService">Room Service</string>
-    <string name="menu_roomManagement">Room Management</string>
-    <string name="menu_staff">Staff</string>
-    <string name="menu_addNewStaff">Add New Staff</string>
-    <string name="menu_editStaff">Edit Staff</string>
+    <string name="home">Home</string>
+    <string name="booking">Booking</string>
+    <string name="profile">Profile</string>
+    <string name="addNewBooking">Add New Booking</string>
+    <string name="check_in_check_out">Check in / Check Out</string>
+    <string name="check_in">Check in</string>
+    <string name="check_out">Check Out</string>
+    <string name="roomService">Room Service</string>
+    <string name="roomManagement">Room Management</string>
+    <string name="staff">Staff</string>
+    <string name="addNewStaff">Add New Staff</string>
+    <string name="editStaff">Edit Staff</string>
 </resources>
