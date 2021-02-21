@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Golden Beach Hotel Management System</string>
+    <string name="header">header</string>
+    <string name="back_button">back_button</string>
+    <string name="check_in_check_out">Check In / Check Out</string>
+    <string name="check_in">Check In</string>
 </resources>
