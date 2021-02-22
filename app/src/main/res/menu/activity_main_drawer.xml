@@ -39,10 +39,10 @@
                     android:title="@string/check_in_check_out" />
                 <item
                     android:id="@+id/nav_checkIn"
-                    android:title="@string/check_in" />
+                    android:title="@string/view_check_ins" />
                 <item
                     android:id="@+id/nav_checkOut"
-                    android:title="@string/check_out" />
+                    android:title="@string/view_check_outs" />
             </group>
         </menu>
     </item>

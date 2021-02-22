@@ -8,11 +8,13 @@
     <string name="profile">Profile</string>
     <string name="addNewBooking">Add New Booking</string>
     <string name="check_in_check_out">Check in / Check Out</string>
-    <string name="check_in">Check in</string>
-    <string name="check_out">Check Out</string>
+    <string name="view_check_ins">View Check Ins</string>
+    <string name="view_check_outs">View Check Outs</string>
     <string name="roomService">Room Service</string>
     <string name="roomManagement">Room Management</string>
     <string name="staff">Staff</string>
     <string name="addNewStaff">Add New Staff</string>
     <string name="editStaff">Edit Staff</string>
+    <string name="showing_bookings_for">Showing bookings for :</string>
+    <string name="change">Change</string>
 </resources>

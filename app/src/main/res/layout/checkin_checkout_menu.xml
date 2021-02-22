@@ -38,13 +38,29 @@
         app:layout_constraintTop_toTopOf="@id/header_background" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/check_in"
+        android:id="@+id/view_check_ins_button"
+        android:layout_width="330dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/view_check_ins"
         android:textColor="@color/text_color_brown"
+        android:textSize="24sp"
         app:backgroundTint="@color/item_background_yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_background" />
+
+    <Button
+        android:id="@+id/view_check_outs_button"
+        android:layout_width="330dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/view_check_outs"
+        android:textColor="@color/text_color_brown"
+        android:textSize="24sp"
+        app:backgroundTint="@color/item_background_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_check_ins_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
