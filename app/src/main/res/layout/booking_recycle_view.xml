@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bookingDetails"
+        android:layout_width="337dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="70dp"
+        app:cardBackgroundColor="@color/item_background_yellow"
+        app:cardElevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/labelID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBrownText"
+                android:text="@string/booking_id"
+                android:layout_marginStart="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:layout_toEndOf="@+id/labelID"
+                android:id="@+id/txtID"
+                android:layout_marginStart="5dp"
+                />
+
+            <TextView
+                android:id="@+id/labelDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBrownText"
+                android:text="@string/booking_date"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="40dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:layout_toEndOf="@+id/labelDate"
+                android:id="@+id/txtBookDate"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="40dp"
+                />
+
+            <TextView
+                android:id="@+id/labelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBrownText"
+                android:text="@string/name"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="80dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:layout_toEndOf="@+id/labelName"
+                android:id="@+id/txtName"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="80dp"
+                />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

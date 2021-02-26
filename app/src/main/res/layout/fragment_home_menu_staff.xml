@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home_menu_staff"
+    android:background="@android:color/transparent"
+    >
+
+
+    <ImageButton
+        android:id="@+id/btnBooking"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/booking"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnCheckInOut"
+        android:layout_width="151dp"
+        android:layout_height="152dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/checkin_checkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintStart_toEndOf="@+id/btnBooking"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnRoomManagement"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roommanagement"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+
+    <ImageButton
+        android:id="@+id/btnRoomService"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roomservice"
+        app:layout_constraintStart_toEndOf="@+id/btnRoomManagement"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
