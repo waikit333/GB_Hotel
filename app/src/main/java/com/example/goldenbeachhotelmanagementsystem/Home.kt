@@ -10,13 +10,6 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
 
-        //add listener for checkincheckout button
-        //val checkInButton: Button = findViewById(R.id.checkInBtn)
-        //checkInButton.setOnClickListener{
-            //val intent = Intent(this,CheckIn_CheckOut_Menu::class.java)
-            //startActivity(intent)
-        //}
-
 
     }
 }
