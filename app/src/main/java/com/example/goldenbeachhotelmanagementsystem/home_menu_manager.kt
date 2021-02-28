@@ -8,9 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 
-
-import androidx.core.view.ViewCompat
-
 class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +28,7 @@ class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
         val btnCheckInOut = view?.findViewById<ImageButton>(R.id.btnCheckInOut)
         if (btnCheckInOut != null) {
             btnCheckInOut.setOnClickListener(){
-                val intent = Intent(activity,CheckIn_CheckOut_Menu::class.java)
+                val intent = Intent(activity,CheckInCheckOutMenu::class.java)
                 startActivity(intent)
             }
         }

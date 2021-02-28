@@ -28,7 +28,7 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         val btnCheckInOut = view?.findViewById<ImageButton>(R.id.btnCheckInOut)
         if (btnCheckInOut != null) {
             btnCheckInOut.setOnClickListener(){
-                val intent = Intent(activity,CheckIn_CheckOut_Menu::class.java)
+                val intent = Intent(activity,CheckInCheckOutMenu::class.java)
                 startActivity(intent)
             }
         }

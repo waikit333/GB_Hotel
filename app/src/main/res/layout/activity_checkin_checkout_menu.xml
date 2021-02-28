@@ -7,9 +7,13 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/downToolbar"
+        layout="@layout/down_toolbar"/>
 
     <Button
         android:id="@+id/view_check_ins_button"

@@ -38,7 +38,7 @@ class home_menu_admin : Fragment(R.layout.fragment_home_menu_admin) {
         val btnAddNewStaff = view?.findViewById<ImageButton>(R.id.btnAddNewStaff)
         if (btnAddNewStaff != null) {
             btnAddNewStaff.setOnClickListener(){
-                val intent = Intent(activity,CheckIn_CheckOut_Menu::class.java)
+                val intent = Intent(activity,CheckInCheckOutMenu::class.java)
                 startActivity(intent)
             }
         }
