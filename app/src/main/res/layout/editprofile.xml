@@ -206,13 +206,13 @@
             android:inputType="textPersonName"
             android:text="Staff" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
+        <Button
+            android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="480dp"
-            android:layout_marginLeft="280dp"
-            app:srcCompat="@drawable/edit_staff_button" />
+            android:layout_marginTop="520dp"
+            android:layout_marginLeft="270dp"
+            android:text="Save" />
 
 
     </FrameLayout>
