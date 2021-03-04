@@ -34,7 +34,7 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         }
         val btnRoomManagement = view?.findViewById<ImageButton>(R.id.btnRoomManagement)
         if (btnRoomManagement != null) {
-            btnBooking.setOnClickListener(){
+            btnRoomManagement.setOnClickListener(){
                 val intent = Intent(activity,RoomManagement::class.java)
                 startActivity(intent)
             }

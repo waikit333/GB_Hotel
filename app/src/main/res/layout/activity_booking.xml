@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Booking">
+    tools:context=".Booking"
+    android:id="@+id/bookingView">
 
     <include
         android:id="@+id/include"
@@ -56,10 +57,12 @@
         app:layout_constraintTop_toBottomOf="@id/bookingSearch"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="32dp"/>
+        android:layout_marginStart="32dp"
+        android:id="@+id/rvBooking"
+        android:scrollbars="vertical"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/btnAddNewBooking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -70,6 +73,8 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:onClick="addNewBookingOnClick"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

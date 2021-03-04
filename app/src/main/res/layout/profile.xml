@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="110dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Full Name :" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="180dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Staff Id : " />
 
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="210dp"
             android:layout_marginTop="180dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Date Of Birth :" />
 
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="250dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Gender :" />
 
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="290dp"
             android:layout_marginLeft="30dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="IC :" />
 
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="210dp"
             android:layout_marginTop="290dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Contact No :" />
 
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="360dp"
             android:layout_marginLeft="30dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Email :"/>
 
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="430dp"
             android:layout_marginLeft="30dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Address :" />
 
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="500dp"
             android:layout_marginLeft="30dp"
-            android:fontFamily="@font/carter_one"
+            android:fontFamily="@font/pala"
             android:textSize="18sp"
             android:text="Position :" />
 

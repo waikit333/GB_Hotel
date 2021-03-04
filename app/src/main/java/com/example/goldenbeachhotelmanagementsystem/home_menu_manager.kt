@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 
 class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
         }
         val btnRoomManagement = view?.findViewById<ImageButton>(R.id.btnRoomManagement)
         if (btnRoomManagement != null) {
-            btnBooking.setOnClickListener(){
+            btnRoomManagement.setOnClickListener(){
                 val intent = Intent(activity,RoomManagement::class.java)
                 startActivity(intent)
             }
@@ -42,15 +43,15 @@ class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
         val btnRoomService = view?.findViewById<ImageButton>(R.id.btnRoomService)
         if (btnRoomService != null) {
             btnRoomService.setOnClickListener(){
-                val intent = Intent(activity,Booking::class.java)
-                startActivity(intent)
+                /*val intent = Intent(activity,Booking::class.java)
+                startActivity(intent)*/
             }
         }
         val btnStaff = view?.findViewById<ImageButton>(R.id.btnStaff)
         if (btnStaff != null) {
             btnStaff.setOnClickListener(){
-                val intent = Intent(activity,Booking::class.java)
-                startActivity(intent)
+                /*val intent = Intent(activity,Booking::class.java)
+                startActivity(intent)*/
             }
         }
         return view

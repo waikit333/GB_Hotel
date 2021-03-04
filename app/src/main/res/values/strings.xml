@@ -29,6 +29,28 @@
     <string name="booking_id">Booking ID:</string>
     <string name="booking_date">Booking Date:</string>
     <string name="name">Name:</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="first_name">First Name:</string>
+    <string name="last_name">Last Name:</string>
+    <string name="ic">IC:</string>
+    <string name="contact_no">Contact No:</string>
+    <string name="email">Email:</string>
+    <string name="booking_details">Booking Details</string>
+    <string name="no_of_guest">No of Guest:</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="other_guest">Other Guests Name:</string>
+    <string name="hotel_meals">Hotel\'s Meals</string>
+    <string name="total">Total:</string>
+    <string name="add_button_text">ADD</string>
+    <string-array name="type_of_room">
+        <item>Single Room</item>
+        <item>Double Room</item>
+        <item>Triple Room</item>
+        <item>Quad Room</item>
+        <item>Queen Room</item>
+        <item>King Room</item>
+    </string-array>
     <string-array name="floor_num">
         <item>1</item>
         <item>2</item>

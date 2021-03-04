@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddNewBooking"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-29dp"
+        tools:layout_editor_absoluteY="196dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_details"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:textSize="28dp"
+                android:layout_marginTop="70dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtFirstName"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="120dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
+                    android:textSize="16dp"
+                    android:backgroundTint="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtLastName"
+                android:layout_toEndOf="@id/txtFirstName"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="120dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:inputType="textPersonName"
+                    android:textSize="16dp"
+                    android:backgroundTint="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtIC"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="200dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ic"
+                    android:inputType="number"
+                    android:textSize="16dp"
+                    android:backgroundTint="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPhone"
+                android:layout_toEndOf="@id/txtIC"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="200dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/contact_no"
+                    android:inputType="phone"
+                    android:textSize="16dp"
+                    android:backgroundTint="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtEmail"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="280dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:hint="@string/email"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="360dp"
+                android:text="@string/booking_details"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:textSize="28dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_of_room"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/typeOfRoomSpinner"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="440dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/dropdown_style"
+                />
+
+
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
