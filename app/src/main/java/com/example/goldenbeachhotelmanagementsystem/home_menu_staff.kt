@@ -42,7 +42,7 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         val btnRoomService = view?.findViewById<ImageButton>(R.id.btnRoomService)
         if (btnRoomService != null) {
             btnRoomService.setOnClickListener(){
-                val intent = Intent(activity,Booking::class.java)
+                val intent = Intent(activity,RoomService::class.java)
                 startActivity(intent)
             }
         }

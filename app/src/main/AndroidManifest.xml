@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenBeachHotelManagementSystem">
-        <activity android:name=".CheckIns"></activity>
+        <activity android:name=".RoomService"></activity>
+        <activity android:name=".CheckIns" />
         <activity android:name=".Booking" />
         <activity android:name=".RoomManagement" />
         <activity android:name=".CheckInCheckOutMenu" />
