@@ -43,6 +43,8 @@
     <string name="hotel_meals">Hotel\'s Meals</string>
     <string name="total">Total:</string>
     <string name="add_button_text">ADD</string>
+    <string name="food"><u>Food</u></string>
+    <string name="categoryimage">categoryImage</string>
     <string-array name="type_of_room">
         <item>Single Room</item>
         <item>Double Room</item>
