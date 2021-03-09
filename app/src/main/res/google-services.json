@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "202071142734",
+    "firebase_url": "https://bait2073-mad-96b0f-default-rtdb.firebaseio.com",
+    "project_id": "bait2073-mad-96b0f",
+    "storage_bucket": "bait2073-mad-96b0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202071142734:android:78ed1bec3655c6a44eae1f",
+        "android_client_info": {
+          "package_name": "com.example.goldenbeachhotelmanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202071142734-qahgotnkuue07cgceeh16uhvqu7duc6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcwBrN-O1-emSDW5G0_TAMjbPjX7nhjHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202071142734-qahgotnkuue07cgceeh16uhvqu7duc6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
