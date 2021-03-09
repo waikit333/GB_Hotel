@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 
 class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +20,17 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         val view: View = inflater.inflate(R.layout.fragment_home_menu_staff, container,
             false)
         val btnBooking = view?.findViewById<ImageButton>(R.id.btnBooking)
+
+        var name :String? = ""
+        val bundle :Bundle ?=arguments
+        if (bundle!=null){
+            name = bundle.getString("name")
+        }
+        var txtName = view?.findViewById<TextView>(R.id.txtName)
+        if (txtName != null) {
+            txtName.text = name
+        }
+
         if (btnBooking != null) {
             btnBooking.setOnClickListener(){
                 val intent = Intent(activity,Booking::class.java)

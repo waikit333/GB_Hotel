@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +29,17 @@ class home_menu_admin : Fragment(R.layout.fragment_home_menu_admin) {
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_home_menu_admin, container,
             false)
+
+        var name :String? = ""
+        val bundle :Bundle ?=arguments
+        if (bundle!=null){
+            name = bundle.getString("name")
+        }
+        var txtName = view?.findViewById<TextView>(R.id.txtName)
+        if (txtName != null) {
+            txtName.text = name
+        }
+
         val btnStaff = view?.findViewById<ImageButton>(R.id.btnStaff)
         if (btnStaff != null) {
             btnStaff.setOnClickListener(){

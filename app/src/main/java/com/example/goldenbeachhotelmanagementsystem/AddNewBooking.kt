@@ -22,13 +22,14 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_add_new_booking, container, false)
         val typeOfRoomSpinner = view?.findViewById<Spinner>(R.id.typeOfRoomSpinner)
-        ArrayAdapter.createFromResource(activity as Booking, R.array.type_of_room, android.R.layout.simple_spinner_item).also { typeOfRoomAdapter ->
+        activity?.let {
+            ArrayAdapter.createFromResource(it, R.array.type_of_room, android.R.layout.simple_spinner_item).also { typeOfRoomAdapter ->
             typeOfRoomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             typeOfRoomSpinner?.adapter = typeOfRoomAdapter
         }
+        }
         typeOfRoomSpinner?.onItemSelectedListener =object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                println("Type of Room")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

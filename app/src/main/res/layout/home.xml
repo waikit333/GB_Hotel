@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_background">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/homeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <include
         android:id="@+id/include"
         layout="@layout/toolbar_top" />
@@ -12,51 +21,9 @@
     <include
         layout="@layout/down_toolbar"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:id="@+id/home_down_toolBar"/>
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.goldenbeachhotelmanagementsystem.home_menu_manager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="180dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="95dp"
-        android:text="@string/welcome_message"
-        android:textAppearance="@style/palaBoldBrownText"
-        android:textSize="22dp"
-        app:layout_constraintStart_toEndOf="@+id/imgIcon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icons8_beach_50" />
-
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="95dp"
-        android:text="name"
-        android:textAppearance="@style/palaBoldBrownText"
-        android:textSize="22dp"
-        app:layout_constraintStart_toEndOf="@+id/txtWelcome"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
