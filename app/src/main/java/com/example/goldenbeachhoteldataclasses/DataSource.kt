@@ -11,7 +11,7 @@ class DataSource {
         database  = FirebaseDatabase.getInstance()
         var foodList : MutableList<DataClassRoomServiceCategory> =  mutableListOf()
 
-        database.getReference("RoomServiceCategories/Food").get().addOnSuccessListener {
+        database.getReference("RoomServiceCategories").child("Food").get().addOnSuccessListener {
             for (i in it.children) {
                 Log.d("TAG", it.toString())
                 var category = i.getValue(DataClassRoomServiceCategory::class.java)
