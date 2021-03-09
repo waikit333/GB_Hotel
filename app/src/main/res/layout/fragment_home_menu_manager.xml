@@ -8,31 +8,68 @@
     android:background="@android:color/transparent"
     >
 
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="95dp"
+        android:text="@string/welcome_message"
+        android:textAppearance="@style/palaBoldBrownText"
+        android:textSize="22dp"
+        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_beach_50" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="95dp"
+        android:text="name"
+        android:textAppearance="@style/palaBoldBrownText"
+        android:textSize="22dp"
+        app:layout_constraintStart_toEndOf="@+id/txtWelcome"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnBooking"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/booking"
         app:layout_constraintStart_toEndOf="@+id/include"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
 
     <ImageButton
         android:id="@+id/btnCheckInOut"
         android:layout_width="151dp"
         android:layout_height="152dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/checkin_checkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toEndOf="@+id/btnBooking"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imgIcon" />
 
     <ImageButton
         android:id="@+id/btnRoomManagement"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/roommanagement"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +89,7 @@
         android:id="@+id/btnStaff"
         android:layout_width="124dp"
         android:layout_height="129dp"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="135dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/staff"
         app:layout_constraintStart_toStartOf="parent"

@@ -185,6 +185,10 @@ class RoomManagement : AppCompatActivity() {
         }
     }
 
+    fun btnRequestOnClick(view:View){
+
+    }
+
     private fun readData(){
         database = FirebaseDatabase.getInstance()
         roomRef = database.getReference("Rooms")
@@ -228,7 +232,17 @@ class RoomManagement : AppCompatActivity() {
         })
 
     }
+    private fun readCustData(){
 
+    }
+
+    private fun readRoomServiceData(){
+
+    }
+
+    private fun readBookingData(){
+
+    }
     private fun  isAvailable (status:String):Boolean{
         return status.equals("available")
     }

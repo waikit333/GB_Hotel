@@ -50,8 +50,6 @@
         <item>Double Room</item>
         <item>Triple Room</item>
         <item>Quad Room</item>
-        <item>Queen Room</item>
-        <item>King Room</item>
     </string-array>
     <string-array name="floor_num">
         <item>1</item>

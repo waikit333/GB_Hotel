@@ -17,6 +17,8 @@ class SplashScreen : AppCompatActivity() {
         )
         Handler().postDelayed({
             val intent = Intent(this, Home::class.java)
+            intent.putExtra("type","Staff")
+            intent.putExtra("name","Staff")
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()
