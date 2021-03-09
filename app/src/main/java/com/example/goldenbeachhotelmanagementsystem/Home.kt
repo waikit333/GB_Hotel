@@ -9,10 +9,12 @@ import com.google.firebase.database.FirebaseDatabase
 
 
 class Home : AppCompatActivity() {
-
+    private lateinit var database: FirebaseDatabase
+    private lateinit var roomRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
 
+        
     }
 }
