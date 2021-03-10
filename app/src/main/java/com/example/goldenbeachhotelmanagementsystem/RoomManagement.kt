@@ -205,10 +205,13 @@ class RoomManagement : AppCompatActivity() {
         selectedRoomRef.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var room = snapshot.getValue(DataClassRoom::class.java)
+                println(room)
+                println(room?.status)
+                println(isAvailable(room?.status.toString()))
                 if(isAvailable(room?.status.toString())){
-                    txtFloor.text = room?.floor.toString()
-                    txtRoom.text = room?.room.toString()
-                    txtTypeOfRoom.text = room?.type
+                    txtFloor.text = selectedFloor.toString()
+                    txtRoom.text = selectedRoom.toString()
+                    txtTypeOfRoom.text = room?.type.toString()
                     txtAvailability.text = "Yes"
                     txtRoomStatus.text = room?.status
                     txtCust.text = "-"
@@ -244,7 +247,7 @@ class RoomManagement : AppCompatActivity() {
 
     }
     private fun  isAvailable (status:String):Boolean{
-        return status.equals("available")
+        return status.equals("Available")
     }
 
 
