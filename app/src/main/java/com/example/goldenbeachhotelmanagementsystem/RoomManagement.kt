@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import com.google.firebase.database.*
 import com.example.goldenbeachhoteldataclasses.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
 
 class RoomManagement : AppCompatActivity() {
     private var selectedFloor = 1
@@ -18,15 +18,18 @@ class RoomManagement : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var roomRef: DatabaseReference
     private lateinit var roomServiceRef: DatabaseReference
-    private lateinit var bookingRef: DatabaseReference
-    private lateinit var custRefer: DatabaseReference
+    private lateinit var bookedRoomRef: DatabaseReference
+    private lateinit var roomServiceItemRef: DatabaseReference
+    private var roomID = ""
+    private var bookingID = ""
+    private var custID = ""
+    private var roomService = ""
+    private lateinit var roomServiceList:MutableList<DataClassRoomService>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_management)
         val floorSpinner = findViewById<Spinner>(R.id.floorSpinner)
-        val txtFloor = findViewById<TextView>(R.id.txtFloor)
         ArrayAdapter.createFromResource(this,R.array.floor_num,android.R.layout.simple_spinner_item).also{
             floorAdapter -> floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             floorSpinner.adapter = floorAdapter
@@ -199,56 +202,139 @@ class RoomManagement : AppCompatActivity() {
         var txtRoomStatus= findViewById<TextView>(R.id.txtRoomStatus)
         var txtCust = findViewById<TextView>(R.id.txtCust)
         var txtCleaningStatus = findViewById<TextView>(R.id.txtCleaningStatus)
-        var txtRoomService= findViewById<TextView>(R.id.txtRoomService)
+        var txtRoomService = findViewById<TextView>(R.id.txtRoomService)
 
-        var selectedRoomRef:DatabaseReference = roomRef.child("F"+selectedFloor + "R" + selectedRoom)
+        roomID = "F"+selectedFloor + "R" + selectedRoom
+        var selectedRoomRef:DatabaseReference = roomRef.child(roomID)
         selectedRoomRef.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var room = snapshot.getValue(DataClassRoom::class.java)
-                println(room)
-                println(room?.status)
-                println(isAvailable(room?.status.toString()))
+                txtFloor.text = selectedFloor.toString()
+                txtRoom.text = selectedRoom.toString()
+                txtTypeOfRoom.text = room?.type.toString()
+                txtRoomStatus.text = room?.status
+                if(room?.cleaningStatus == true)
+                    txtCleaningStatus.text = "Requested"
+                else
+                    txtCleaningStatus.text = "-"
+
                 if(isAvailable(room?.status.toString())){
-                    txtFloor.text = selectedFloor.toString()
-                    txtRoom.text = selectedRoom.toString()
-                    txtTypeOfRoom.text = room?.type.toString()
                     txtAvailability.text = "Yes"
-                    txtRoomStatus.text = room?.status
                     txtCust.text = "-"
-                    if(room?.cleaningStatus == true)
-                        txtCleaningStatus.text = "Requested"
-                    else
-                        txtCleaningStatus.text = "-"
                     txtRoomService.text = "-"
                 }
                 else{
-
+                    txtAvailability.text = "No"
+                    readID()
+                    readCustData()
+                    readRoomServiceData()
+                    val btnRequest = findViewById<Button>(R.id.btnRequest)
+                    btnRequest.isClickable = true
                 }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("cancel", "Failed to load data", error.toException())
+            }
+        })
+
+    }
+
+    private fun readCustData(){
+        var txtCust = findViewById<TextView>(R.id.txtCust)
+        var cusRef = database.getReference("Customers").child(custID)
+        cusRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(child in snapshot.children){
+                    if(child.key.toString().equals(custID)){
+                        var cust = child.getValue(DataClassCustomer::class.java)
+                        var custName = cust?.firstName + " " + cust?.lastName
+                        txtCust.text = custName
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("cancel", "Failed to load IDs", error.toException())
+            }
+
+        })
+    }
+
+    private fun readRoomServiceData(){
+        roomServiceList.clear()
+        roomServiceList = mutableListOf()
+        roomServiceRef = database.getReference("RoomServices").child(bookingID)
+        roomServiceRef.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(ds in snapshot.children){
+                    for(dsQuantity in ds.children){
+                        if(ds.key.toString().equals(bookingID)){
+                            var quantity = dsQuantity.child("quantity").getValue(Int::class.java)
+                            var roomService = DataClassRoomService(quantity,dsQuantity.key.toString())
+                            if (roomService != null) {
+                                roomServiceList.add(roomService)
+                            }
+                        }
+                    }
+                }
+                var txtRoomService= findViewById<TextView>(R.id.txtRoomService)
+                txtRoomService.text = ""
+                if (!roomServiceList.isNullOrEmpty()){
+                    for (i in roomServiceList){
+                        roomServiceItemRef = database.getReference("RoomServiceItems").child(i.id.toString())
+                        roomServiceItemRef.addValueEventListener(object:ValueEventListener{
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                var name = dataSnapshot.child("name").getValue(String::class.java)
+                                roomService = txtRoomService.text.toString()
+                                roomService += name?.toString() + " x" + i.quantity + "\n"
+                                txtRoomService.text = roomService
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.w("cancel", "Failed to load IDs", error.toException())
+                            }
+
+                        })
+                    }
+                }
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w("cancel", "loadPost:onCancelled", error.toException())
+                Log.w("cancel", "Failed to load IDs", error.toException())
             }
 
         })
 
-    }
-    private fun readCustData(){
+
+
 
     }
 
-    private fun readRoomServiceData(){
 
+    private fun readID(){
+        bookedRoomRef = database.getReference("BookedRooms").child(roomID)
+        bookedRoomRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var room = snapshot.getValue(DataClassBookedRoom::class.java)
+                bookingID = room?.bookingID.toString()
+                custID = room?.custID.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("cancel", "Failed to load IDs", error.toException())
+            }
+
+        })
     }
 
-    private fun readBookingData(){
-
-    }
     private fun  isAvailable (status:String):Boolean{
         return status.equals("Available")
     }
 
 
 }
+
+
+

@@ -64,4 +64,5 @@ class home_menu_admin : Fragment(R.layout.fragment_home_menu_admin) {
 
         return view
     }
+
 }
