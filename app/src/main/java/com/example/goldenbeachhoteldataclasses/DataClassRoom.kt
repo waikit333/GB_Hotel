@@ -3,7 +3,7 @@ package com.example.goldenbeachhoteldataclasses
 import com.google.firebase.database.Exclude
 
 data class DataClassRoom(
-        val floor: Int? = 0, var room:Int? = 0, var price:Double? = 0.00, var type:String? ="", var status:String?= "", var cleaningStatus:Boolean? = true){
+        var floor: Int? = 0, var room:Int? = 0, var price:Double? = 0.00, var type:String? ="", var status:String?= "", var cleaningStatus:Boolean? = true){
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(

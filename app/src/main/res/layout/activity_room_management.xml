@@ -831,16 +831,31 @@
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/txtCust" />
 
-    <TextView
-        android:id="@+id/txtRoomService"
+    <ScrollView
+        android:id="@+id/roomDetails"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:textAppearance="@style/palaBoldBrownText"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/txtCleaningStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCleaningStatus"
+        app:layout_constraintStart_toEndOf="@+id/textView8">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtRoomService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/palaBoldBrownText"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/txtCleaningStatus" />
+        </LinearLayout>
+    </ScrollView>
+
 
     <TextView
         android:id="@+id/txtRoom"
@@ -857,12 +872,12 @@
         android:id="@+id/btnRequest"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
         android:backgroundTint="@color/button_color_green"
+        android:clickable="false"
         android:onClick="btnRequestOnClick"
         android:text="@string/request"
         android:textAppearance="@style/buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRoomService" />
+        app:layout_constraintTop_toBottomOf="@+id/roomDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>
