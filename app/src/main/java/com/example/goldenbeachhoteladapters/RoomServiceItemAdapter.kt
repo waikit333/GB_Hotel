@@ -10,30 +10,33 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceCategory
+import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceItem
 import com.example.goldenbeachhotelmanagementsystem.R
 import com.example.goldenbeachhotelmanagementsystem.RoomService
 import com.example.goldenbeachhotelmanagementsystem.RoomServiceItems
 
-class RoomServiceCategoryAdapter (
+class RoomServiceItemAdapter (
         private val context: Context,
-        private val dataset: List<DataClassRoomServiceCategory>
-        ) : RecyclerView.Adapter<RoomServiceCategoryAdapter.ItemViewHolder>() {
+        private val dataset: List<DataClassRoomServiceItem>
+        ) : RecyclerView.Adapter<RoomServiceItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
-        val textView: TextView = view.findViewById(R.id.category_name)
+        val name: TextView = view.findViewById(R.id.item_name)
+        val price: TextView = view.findViewById(R.id.item_price)
         val itemLayout: LinearLayout = view.findViewById(R.id.item_layout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-                            .inflate(R.layout.item_room_service_category, parent, false)
+                            .inflate(R.layout.item_room_service_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = item.name
+        holder.name.text = item.name
+        holder.price.text = "RM " + item.price.toString()
         holder.itemLayout.setOnClickListener{
             val intent = Intent(context, RoomServiceItems::class.java)
             intent.putExtra("categoryName", item.name.toString())
