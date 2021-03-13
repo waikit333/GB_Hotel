@@ -189,7 +189,16 @@ class RoomManagement : AppCompatActivity() {
     }
 
     fun btnRequestOnClick(view:View){
-
+        var txtCleaningStatus = findViewById<TextView>(R.id.txtCleaningStatus)
+        if(txtCleaningStatus.text.equals("-")){
+            roomRef.child(roomID).child("cleaningStatus").setValue(true).addOnSuccessListener {
+                Toast.makeText(this,"Cleaning Services is requested! The cleaner will clean the room as soon as possible",Toast.LENGTH_LONG).show()
+            }
+            txtCleaningStatus.text = "Requested"
+        }
+        else{
+            Toast.makeText(this,"This room has requested the cleaning service!",Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun readData(){
@@ -213,12 +222,14 @@ class RoomManagement : AppCompatActivity() {
                 txtRoom.text = selectedRoom.toString()
                 txtTypeOfRoom.text = room?.type.toString()
                 txtRoomStatus.text = room?.status
+                val btnRequest = findViewById<Button>(R.id.btnRequest)
                 if(room?.cleaningStatus == true)
                     txtCleaningStatus.text = "Requested"
                 else
                     txtCleaningStatus.text = "-"
 
                 if(isAvailable(room?.status.toString())){
+                    btnRequest.isClickable = false
                     txtAvailability.text = "Yes"
                     txtCust.text = "-"
                     txtRoomService.text = "-"
@@ -228,7 +239,6 @@ class RoomManagement : AppCompatActivity() {
                     readID()
                     readCustData()
                     readRoomServiceData()
-                    val btnRequest = findViewById<Button>(R.id.btnRequest)
                     btnRequest.isClickable = true
                 }
             }
@@ -255,15 +265,15 @@ class RoomManagement : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w("cancel", "Failed to load IDs", error.toException())
+                Log.w("cancel", "Failed to load customer's name", error.toException())
             }
 
         })
     }
 
     private fun readRoomServiceData(){
-        roomServiceList.clear()
         roomServiceList = mutableListOf()
+        roomServiceList.clear()
         roomServiceRef = database.getReference("RoomServices").child(bookingID)
         roomServiceRef.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -292,7 +302,7 @@ class RoomManagement : AppCompatActivity() {
                             }
 
                             override fun onCancelled(error: DatabaseError) {
-                                Log.w("cancel", "Failed to load IDs", error.toException())
+                                Log.w("cancel", "Failed to load room services", error.toException())
                             }
 
                         })
@@ -302,13 +312,10 @@ class RoomManagement : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w("cancel", "Failed to load IDs", error.toException())
+                Log.w("cancel", "Failed to load get room services' id & quantity", error.toException())
             }
 
         })
-
-
-
 
     }
 
