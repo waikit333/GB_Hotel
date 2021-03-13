@@ -45,6 +45,7 @@
     <string name="add_button_text">ADD</string>
     <string name="food"><u>Food</u></string>
     <string name="categoryimage">categoryImage</string>
+    <string name="drink"><u>Drink</u></string>
     <string-array name="type_of_room">
         <item>Single Room</item>
         <item>Double Room</item>
@@ -73,4 +74,13 @@
         <item>19</item>
         <item>20</item>
     </string-array>
+    <string name="title_activity_room_service_items">RoomServiceItems</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

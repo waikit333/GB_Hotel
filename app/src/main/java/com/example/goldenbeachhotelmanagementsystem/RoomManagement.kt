@@ -8,9 +8,6 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import com.google.firebase.database.*
 import com.example.goldenbeachhoteldataclasses.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import org.json.JSONObject
 
 class RoomManagement : AppCompatActivity() {
     private var selectedFloor = 1
