@@ -38,9 +38,9 @@
                 android:id="@+id/txtFirstName"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="120dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
                 <com.google.android.material.textfield.TextInputEditText
-
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:hint="First Name"
@@ -56,7 +56,8 @@
                 android:layout_toEndOf="@id/txtFirstName"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="120dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
@@ -72,7 +73,8 @@
                 android:id="@+id/txtIC"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="200dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
@@ -89,7 +91,8 @@
                 android:layout_toEndOf="@id/txtIC"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="200dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
@@ -105,13 +108,15 @@
                 android:id="@+id/txtEmail"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="280dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
                     android:hint="@string/email"
+                    android:inputType="textEmailAddress"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +129,8 @@
                 android:layout_marginTop="360dp"
                 android:text="@string/booking_details"
                 android:textAppearance="@style/palaBoldBrownText"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,11 +143,153 @@
                 android:id="@+id/typeOfRoomSpinner"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="440dp"
+                android:layout_marginTop="430dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/dropdown_style"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_of_guest"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="40dp"
+                android:layout_toEndOf="@+id/typeOfRoomSpinner"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/numOfGuestSpinner"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="430dp"
+                android:layout_marginStart="40dp"
+                android:layout_toEndOf="@+id/typeOfRoomSpinner"
+                android:background="@drawable/dropdown_style"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from"
+                android:layout_marginTop="465dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_a_time"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/button_color_green"
+                android:layout_marginTop="500dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/btnFrom"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:layout_marginTop="465dp"
+                android:layout_marginStart="40dp"
+                android:layout_toEndOf="@+id/txtIC"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_a_time"
+                android:id="@+id/btnTo"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/button_color_green"
+                android:layout_marginTop="500dp"
+                android:layout_toEndOf="@+id/txtIC"
+                android:layout_marginStart="40dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnFrom_error"
+                android:id="@+id/txtBtnFrom"
+                android:layout_marginTop="545dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/errorText"
+                android:textSize="10dp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnTo_error"
+                android:id="@+id/txtBtnTo"
+                android:layout_marginTop="545dp"
+                android:layout_marginStart="40dp"
+                android:layout_toEndOf="@+id/txtIC"
+                android:textAppearance="@style/errorText"
+                android:textSize="10dp"
+                android:visibility="invisible"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtOthers"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="580dp"
+                app:errorEnabled="true"
+                android:textAppearance="@style/errorText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:hint="@string/other_guest"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:gravity="top|left"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="720dp"
+                android:text="@string/hotel_meals"
+                android:layout_marginStart="10dp"
+                android:id="@+id/cbxMeal"
+                android:textAppearance="@style/palaBrownText"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:layout_marginTop="730dp"
+                android:layout_marginStart="90dp"
+                android:layout_toEndOf="@+id/cbxMeal"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="770dp"
+                android:layout_marginStart="90dp"
+                android:layout_toEndOf="@+id/cbxMeal"
+                android:textAppearance="@style/palaBrownText"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/btnAddBooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="800dp"
+                android:layout_toEndOf="@+id/cbxMeal"
+                android:backgroundTint="@color/button_color_green"
+                android:text="@string/add_button_text"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
     </ScrollView>

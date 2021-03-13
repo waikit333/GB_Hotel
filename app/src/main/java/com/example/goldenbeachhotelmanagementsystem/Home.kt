@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.goldenbeachhoteldataclasses.DataClassRoom
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DatabaseReference
@@ -34,6 +35,7 @@ class Home : AppCompatActivity(){
         else{
             replaceFragment(home_menu_staff())
         }
+
     }
 
     fun fabOnClick(v: View){
