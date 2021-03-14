@@ -1,24 +1,24 @@
 package com.example.goldenbeachhoteladapters
 
 import android.content.Context
-import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceCategory
 import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceItem
+import com.example.goldenbeachhotelmanagementsystem.ItemDialogFragment
 import com.example.goldenbeachhotelmanagementsystem.R
-import com.example.goldenbeachhotelmanagementsystem.RoomService
-import com.example.goldenbeachhotelmanagementsystem.RoomServiceItems
 
-class RoomServiceItemAdapter (
+class RoomServiceItemAdapter(
         private val context: Context,
-        private val dataset: List<DataClassRoomServiceItem>
-        ) : RecyclerView.Adapter<RoomServiceItemAdapter.ItemViewHolder>() {
+        private val dataset: List<DataClassRoomServiceItem>,
+        private val fragmentManager: FragmentManager
+) : RecyclerView.Adapter<RoomServiceItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
         val name: TextView = view.findViewById(R.id.item_name)
@@ -38,11 +38,13 @@ class RoomServiceItemAdapter (
         holder.name.text = item.name
         holder.price.text = "RM " + item.price.toString()
         holder.itemLayout.setOnClickListener{
-            val intent = Intent(context, RoomServiceItems::class.java)
-            intent.putExtra("categoryName", item.name.toString())
-            context.startActivity(intent)
+            val dialog = ItemDialogFragment()
+            val args = Bundle()
+            args.putString("name", item.name)
+            args.putString("price", item.price.toString())
+            dialog.arguments = args
+            dialog.show(fragmentManager, "Name")
         }
-
     }
 
     override fun getItemCount() = dataset.size

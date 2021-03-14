@@ -39,7 +39,7 @@
     <string name="no_of_guest">No of Guest:</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
-    <string name="other_guest">Other Guests Name (use , to separate each guest):</string>
+    <string name="other_guest">Other Guests Name:</string>
     <string name="hotel_meals">Hotel Meals</string>
     <string name="total">Total:</string>
     <string name="add_button_text">ADD</string>
@@ -87,4 +87,5 @@
     <string name="other_guest_error">Please enter other guest(s) name</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="order_menu">Order Menu</string>
 </resources>

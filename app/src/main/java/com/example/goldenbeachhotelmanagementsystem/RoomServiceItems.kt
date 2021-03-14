@@ -1,9 +1,9 @@
 package com.example.goldenbeachhotelmanagementsystem
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goldenbeachhoteladapters.RoomServiceItemAdapter
@@ -17,6 +17,7 @@ class RoomServiceItems : AppCompatActivity() {
         setContentView(R.layout.activity_room_service_items)
         val categoryName: TextView = findViewById(R.id.heading_category)
         var category = ""
+
         if (intent.extras != null) {
             category = intent.extras!!.getString("categoryName").toString()
             categoryName.text = category
@@ -26,9 +27,9 @@ class RoomServiceItems : AppCompatActivity() {
         rv.addItemDecoration(DividerItemDecoration(applicationContext,
                 DividerItemDecoration.VERTICAL))
 
-        var database: FirebaseDatabase = FirebaseDatabase.getInstance()
-        var itemIDList: MutableList<String> = mutableListOf()
-        var itemList: MutableList<DataClassRoomServiceItem> = mutableListOf()
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val itemIDList: MutableList<String> = mutableListOf()
+        val itemList: MutableList<DataClassRoomServiceItem> = mutableListOf()
         //get item IDs
         database.getReference("RoomServiceCategories").get().addOnSuccessListener {
             for (i in it.child("Food").children) {
@@ -47,9 +48,17 @@ class RoomServiceItems : AppCompatActivity() {
                     }
                 }
             }
-            Log.w("cancel", itemIDList.toString())
-            //based on itemIDList, retrieve item details
-            rv.adapter = RoomServiceItemAdapter(this, itemList)
+            database.getReference("RoomServiceItems").get().addOnSuccessListener { items ->
+                for (i in itemIDList) {
+                    if (items.child(i).exists()) {
+                        val item = items.child(i).getValue(DataClassRoomServiceItem::class.java)
+                        if (item != null) {
+                            itemList.add(item)
+                        }
+                    }
+                }
+                rv.adapter = RoomServiceItemAdapter(this, itemList, this.supportFragmentManager)
+            }
         }
     }
 }
