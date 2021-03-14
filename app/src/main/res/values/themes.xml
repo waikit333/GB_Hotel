@@ -26,8 +26,9 @@
     </style>
 
     <style name="errorText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/selected_button_red</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
         <item name="android:fontFamily">@font/pala</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <style name="palaBoldBrownText" parent="@android:style/TextAppearance.Medium">

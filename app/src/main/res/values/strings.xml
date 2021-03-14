@@ -46,7 +46,7 @@
     <string name="food"><u>Food</u></string>
     <string name="categoryimage">categoryImage</string>
     <string name="drink"><u>Drink</u></string>
-    <string name="pick_a_time">Pick a Time</string>
+    <string name="pick_a_date">Pick a Date</string>
     <string-array name="type_of_room">
         <item>Single Room</item>
         <item>Double Room</item>
@@ -88,4 +88,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="order_menu">Order Menu</string>
+    <string name="alphabet_error">Please enter only alphabet</string>
+    <string name="phone_error">Enter in 0123456789 format</string>
+    <string name="ic_error">Invalid IC format: 123456-12-1234</string>
+    <string name="less_than_today_error">Start date must not less than today\'s date</string>
+    <string name="less_than_from_error">Start date must not less than start date</string>
 </resources>

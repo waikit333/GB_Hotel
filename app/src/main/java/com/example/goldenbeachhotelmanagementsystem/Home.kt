@@ -3,9 +3,11 @@ package com.example.goldenbeachhotelmanagementsystem
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.goldenbeachhoteldataclasses.DataClassRoom
@@ -41,6 +43,13 @@ class Home : AppCompatActivity(){
     fun fabOnClick(v: View){
         val downtool = findViewById<BottomAppBar>(R.id.bottomAppBar)
         downtool.visibility = View.INVISIBLE
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val btnProfileImage = findViewById<ImageButton>(R.id.btnProfileImage)
+
+        toolbar?.setNavigationIcon(R.drawable.back_arrow)
+        btnProfileImage?.visibility = View.INVISIBLE
+        toolbar?.title = getString(R.string.addNewBooking)
+
         val fabAddNewBooking = findViewById<FloatingActionButton>(R.id.fabAddBooking)
         fabAddNewBooking.visibility = View.INVISIBLE
         val manager = supportFragmentManager
