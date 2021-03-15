@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:backgroundTint="@color/item_background_yellow">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booked_date"
+            android:textAppearance="@style/palaBrownText"
+            android:textSize="20dp"
+            android:id="@+id/lblBookingFromTo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booking_date"
+            android:textAppearance="@style/palaBrownText"
+            android:textSize="20dp"
+            android:id="@+id/lblBookingDate"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cust_name"
+            android:textAppearance="@style/palaBrownText"
+            android:textSize="20dp"
+            android:id="@+id/lblCustName"
+            android:layout_marginTop="60dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="@style/palaBoldBrownText"
+            android:textSize="20dp"
+            android:layout_toEndOf="@+id/lblBookingDate"
+            android:id="@+id/txtBookingFromTo"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="@style/palaBoldBrownText"
+            android:textSize="20dp"
+            android:layout_toEndOf="@+id/lblBookingDate"
+            android:id="@+id/txtBookingDate"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="@style/palaBoldBrownText"
+            android:textSize="20dp"
+            android:layout_toEndOf="@+id/lblBookingDate"
+            android:id="@+id/txtCustName"
+            android:layout_marginTop="60dp"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

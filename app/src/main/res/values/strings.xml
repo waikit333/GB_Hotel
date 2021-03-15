@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Golden Beach Hotel Management System</string>
-    <string name="back_button">back_button</string>
     <string name="hotel_name">Golden Beach Hotel</string>
     <string name="home">Home</string>
     <string name="booking">Booking</string>
@@ -26,11 +25,7 @@
     <string name="customer">Customer:</string>
     <string name="cleaning_status">Cleaning Status:</string>
     <string name="request">REQUEST CLEANING</string>
-    <string name="booking_id">Booking ID:</string>
-    <string name="booking_date">Booking Date:</string>
-    <string name="name">Name:</string>
     <string name="customer_details">Customer Details</string>
-    <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="ic">IC:</string>
     <string name="contact_no">Contact No:</string>
@@ -77,20 +72,19 @@
     </string-array>
     <string name="title_activity_room_service_items">RoomServiceItems</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="btnFrom_error">Please choose a start date</string>
-    <string name="btnTo_error">Please choose a end date</string>
     <string name="required_error">This is a required field</string>
     <string name="other_guest_error">Please enter other guest(s) name</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="order_menu">Order Menu</string>
     <string name="alphabet_error">Please enter only alphabet</string>
     <string name="phone_error">Enter in 0123456789 format</string>
     <string name="ic_error">Invalid IC format: 123456-12-1234</string>
     <string name="less_than_today_error">Start date must not less than today\'s date</string>
     <string name="less_than_from_error">Start date must not less than start date</string>
+    <string name="btnSearch">Search</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="logout">Logout</string>
+    <string name="booked_date">Booked Date:</string>
+    <string name="booking_date">Booking Date:</string>
+    <string name="cust_name">Name:</string>
 </resources>
