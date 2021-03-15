@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,6 +19,10 @@ class Booking : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         initRecycleView()
+        val rv: RecyclerView = findViewById(R.id.roomservice_items)
+        rv.addItemDecoration(DividerItemDecoration(applicationContext,
+                DividerItemDecoration.VERTICAL))
+
     }
     fun addNewBookingOnClick(v: View){
         val manager: FragmentManager = supportFragmentManager
@@ -34,7 +39,7 @@ class Booking : AppCompatActivity() {
         val rvBooking= findViewById<RecyclerView>(R.id.rvBooking)
         rvBooking.apply{
             layoutManager = LinearLayoutManager(this@Booking, LinearLayoutManager.HORIZONTAL,false)
-            bookingAdapter = BookingRecyclerAdapter()
+            //bookingAdapter = BookingRecyclerAdapter()
            // adapter = bookingAdapter
         }
     }

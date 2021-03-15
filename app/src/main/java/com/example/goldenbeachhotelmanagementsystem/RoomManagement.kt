@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.database.*
 import com.example.goldenbeachhoteldataclasses.*
 import com.google.gson.Gson
@@ -30,6 +32,13 @@ class RoomManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_management)
+        //show action bar with back arrow
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val drawerLayout = findViewById<DrawerLayout>(R.id.roomManagermentDrawerLayout)
+        setSupportActionBar(toolbar)
+        var helper = helper()
+        helper.changeNavIconAndTitle(supportActionBar,false,toolbar,drawerLayout, this,getString(R.string.roomManagement))
+
         val floorSpinner = findViewById<Spinner>(R.id.floorSpinner)
         ArrayAdapter.createFromResource(this,R.array.floor_num,android.R.layout.simple_spinner_item).also{
             floorAdapter -> floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

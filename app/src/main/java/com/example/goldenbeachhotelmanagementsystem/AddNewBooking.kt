@@ -1,18 +1,23 @@
 package com.example.goldenbeachhotelmanagementsystem
 
 import android.app.DatePickerDialog
+import android.content.RestrictionEntry.TYPE_NULL
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.goldenbeachhoteldataclasses.DataClassBooking
 import com.example.goldenbeachhoteldataclasses.DataClassCustomer
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.util.*
@@ -21,6 +26,7 @@ import java.util.concurrent.TimeUnit
 
 class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
     private var other = ""
+    val HOTEL_MEAL_PRICE = 90
     private var firstName = ""
     private var lastName = ""
     private var ic = ""
@@ -29,6 +35,8 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
     private var numOfGuest = 0
     private var fromDate= ""
     private var toDate= ""
+    var custID = ""
+    var total = 0.00
     private var  type =""
     private var minRoom = 0
     private  var maxRoom = 0
@@ -36,6 +44,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
     private lateinit var reference: DatabaseReference
     private lateinit var txtBtnFrom:TextView
     private lateinit var txtBtnTo:TextView
+    private lateinit var customer:DataClassCustomer
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
@@ -43,19 +52,32 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_add_new_booking, container, false)
+        //Spinner
         val typeOfRoomSpinner = view?.findViewById<Spinner>(R.id.typeOfRoomSpinner)
         val numOfGuestSpinner = view?.findViewById<Spinner>(R.id.numOfGuestSpinner)
-
+        //Button
+        val btnSearch = view?.findViewById<Button>(R.id.btnSearchCust)
         val btnFrom = view?.findViewById<Button>(R.id.btnFrom)
         val btnTo = view?.findViewById<Button>(R.id.btnTo)
         val btnAddBooking = view?.findViewById<Button>(R.id.btnAddBooking)
+        //TextInputLayout
+        val txtFirstName = view?.findViewById<TextInputLayout>(R.id.txtFirstName)
+        val txtLastName = view?.findViewById<TextInputLayout>(R.id.txtLastName)
+        val txtIC = view?.findViewById<TextInputLayout>(R.id.txtIC)
+        val txtPhone = view?.findViewById<TextInputLayout>(R.id.txtPhone)
+        val txtEmail = view?.findViewById<TextInputLayout>(R.id.txtEmail)
+        val txtOthers = view?.findViewById<TextInputLayout>(R.id.txtOthers)
+        //TextView
         txtBtnFrom = view?.findViewById(R.id.txtBtnFrom)!!
         txtBtnTo = view?.findViewById(R.id.txtBtnTo)!!
+        //Variable
         var arrNumOfGuest = mutableListOf<Int>()
         val cal = Calendar.getInstance()
         var year = cal.get(Calendar.YEAR)
         var month = cal.get(Calendar.MONTH)
         var day = cal.get(Calendar.DAY_OF_MONTH)
+        //Checkbox
+        var cbxMeal = view?.findViewById<CheckBox>(R.id.cbxMeal)
 
         typeOfRoomSpinner?.onItemSelectedListener =object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -64,34 +86,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 type = parent?.getItemAtPosition(position).toString()
                 arrNumOfGuest.clear()
-                when (type) {
-                    "Single Room" -> {
-                        arrNumOfGuest.add(1)
-                        minRoom = 1
-                        maxRoom = 10
-                    }
-                    "Double Room" -> {
-                        for (i in 0..1) {
-                            arrNumOfGuest.add(i + 1)
-                            minRoom = 10
-                            maxRoom = 18
-                        }
-                    }
-                    "Triple Room" -> {
-                        for (i in 0..2) {
-                            arrNumOfGuest.add(i + 1)
-                            minRoom = 19
-                            maxRoom = 24
-                        }
-                    }
-                    "Quad Room" -> {
-                        for (i in 0..3) {
-                            arrNumOfGuest.add(i + 1)
-                            minRoom = 25
-                            maxRoom = 28
-                        }
-                    }
-                }
+                readPrice(cbxMeal)
                 activity?.let {
                     val numOfGuestAdapter = ArrayAdapter<Int>(it, android.R.layout.simple_spinner_item, arrNumOfGuest)
                     numOfGuestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -104,7 +99,18 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         numOfGuest = parent?.getItemAtPosition(position).toString().toInt()
                         val txtOtherGuest = view?.findViewById<TextInputLayout>(R.id.txtOthers)
-                        txtOtherGuest?.editText?.isEnabled = numOfGuest > 1
+                        if(numOfGuest > 1){
+                            txtOtherGuest?.editText?.isEnabled = true
+                            txtOtherGuest?.editText?.isFocusableInTouchMode = true
+                            txtOtherGuest?.editText?.inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                        else{
+                            txtOtherGuest?.editText?.isEnabled = false
+                            txtOtherGuest?.editText?.isFocusableInTouchMode = false
+                            txtOtherGuest?.editText?.inputType = TYPE_NULL
+                        }
+
+
                     }
                 }
             }
@@ -151,8 +157,36 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
 
                 }, year, month, day).show()
             }
+
             btnAddBooking.setOnClickListener(){
-                confirm()
+                confirm(txtEmail,txtFirstName,txtIC,txtLastName,txtOthers,txtPhone,cbxMeal)
+            }
+
+            btnSearch.setOnClickListener(){
+                validateIC(txtIC)
+                readCustID()
+                if (!custID.isEmpty()){
+                    reference.addListenerForSingleValueEvent(object: ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (cust in snapshot.children){
+                                if(cust.key.equals(custID)) {
+                                    txtEmail.editText?.setText(cust.child("email").getValue(String::class.java).toString())
+                                    txtFirstName.editText?.setText(cust.child("firstName").getValue(String::class.java).toString())
+                                    txtLastName.editText?.setText(cust.child("lastName").getValue(String::class.java).toString())
+                                    txtPhone.editText?.setText(cust.child("phone").getValue(String::class.java).toString())
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+                }
+                else{
+                    Toast.makeText(activity,"No record found! Please fill in all the customer details",Toast.LENGTH_LONG).show()
+                }
             }
             ArrayAdapter.createFromResource(it, R.array.type_of_room, android.R.layout.simple_spinner_item).also { typeOfRoomAdapter ->
                 typeOfRoomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -176,6 +210,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
         return true
     }
+
     private fun validateToDate():Boolean{
         val to = SimpleDateFormat("ddMMyyyy").parse(toDate)
         val from = SimpleDateFormat("ddMMyyyy").parse(fromDate)
@@ -195,8 +230,8 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
         return true
     }
-    private fun validateFirstName():Boolean{
-        val txtFirstName = view?.findViewById<TextInputLayout>(R.id.txtFirstName)
+
+    private fun validateFirstName(txtFirstName:TextInputLayout):Boolean{
         firstName = txtFirstName?.editText?.text.toString().trim()
         if (firstName.isEmpty()){
             txtFirstName?.error = getString(R.string.required_error)
@@ -212,8 +247,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun validateLastName():Boolean{
-        val txtLastName = view?.findViewById<TextInputLayout>(R.id.txtLastName)
+    private fun validateLastName(txtLastName:TextInputLayout):Boolean{
         lastName = txtLastName?.editText?.text.toString().trim()
         if (lastName.isEmpty()){
             txtLastName?.error = getString(R.string.required_error)
@@ -229,8 +263,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun validateIC():Boolean{
-        val txtIC = view?.findViewById<TextInputLayout>(R.id.txtIC)
+    private fun validateIC(txtIC:TextInputLayout):Boolean{
         ic = txtIC?.editText?.text.toString().trim()
         if (ic.isEmpty()){
             txtIC?.error = getString(R.string.required_error)
@@ -246,8 +279,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun validatePhone():Boolean{
-        val txtPhone = view?.findViewById<TextInputLayout>(R.id.txtPhone)
+    private fun validatePhone(txtPhone:TextInputLayout):Boolean{
         phone = txtPhone?.editText?.text.toString().trim()
         if (phone.isEmpty()){
             txtPhone?.error = getString(R.string.required_error)
@@ -263,8 +295,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun validateEmail():Boolean{
-        val txtEmail = view?.findViewById<TextInputLayout>(R.id.txtEmail)
+    private fun validateEmail(txtEmail:TextInputLayout):Boolean{
         email = txtEmail?.editText?.text.toString().trim()
         if (email.isEmpty()){
             txtEmail?.error = getString(R.string.required_error)
@@ -276,8 +307,7 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun validateOtherGuest():Boolean{
-        val txtOthers = view?.findViewById<TextInputLayout>(R.id.txtOthers)
+    private fun validateOtherGuest(txtOthers:TextInputLayout):Boolean{
         other = txtOthers?.editText?.text.toString().trim()
         val otherGuestList: List<String> = other.split(",").map { it -> it.trim() }
         otherGuestList.forEach { it ->
@@ -297,23 +327,82 @@ class AddNewBooking : Fragment(R.layout.fragment_add_new_booking) {
         }
     }
 
-    private fun confirm(){
-        var validEmail = validateEmail()
-        var validFirstName = validateFirstName()
-        var validIC = validateIC()
-        var validLastName = validateLastName()
-        var validOtherGuest = validateOtherGuest()
-        var validPhone = validatePhone()
+    private fun confirm(txtEmail: TextInputLayout,txtFirstName:TextInputLayout,txtIC: TextInputLayout,txtLastName: TextInputLayout,txtOthers: TextInputLayout,txtPhone: TextInputLayout,cbxMeal:CheckBox){
+        var validEmail = validateEmail(txtEmail)
+        var validFirstName = validateFirstName(txtFirstName)
+        var validIC = validateIC(txtIC)
+        var validLastName = validateLastName(txtLastName)
+        var validOtherGuest = validateOtherGuest(txtOthers)
+        var validPhone = validatePhone(txtPhone)
         var validFrom = validateFromDate()
         var validTo = validateToDate()
+        reference = database.getReference("Customers")
         if(validEmail && validFirstName && validIC && validLastName && validOtherGuest && validPhone && validFrom && validTo){
-            val customer = DataClassCustomer(email, firstName, ic, lastName, phone)
+            customer = DataClassCustomer(email, firstName, ic, lastName, phone)
+            if (custID.isEmpty()){
+                var custRef = reference.push()
+                var newCustID = custRef.key.toString()
+                reference.child(newCustID).setValue(customer)
 
+            }
+            writeBooking(cbxMeal)
         }
     }
 
-    private fun checkDuplicate(customer: DataClassCustomer):Boolean{
-        return false
+    private fun readPrice(cbxMeal: CheckBox){
+        var roomRef = database.getReference("Rooms")
+        roomRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                total = snapshot.child(type).child("price").getValue(Double::class.java)!!
+                val txtTotal = view?.findViewById<TextView>(R.id.txtTotal)
+                if (total != null) {
+                    if (cbxMeal.isChecked) {
+                        total += (HOTEL_MEAL_PRICE * numOfGuest)
+                        txtTotal?.text = "RM " + String.format("%.2f", total)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+    private fun writeBooking(cbxMeal: CheckBox) {
+        val sdf = SimpleDateFormat("ddMMyyyy")
+        val currentDate = sdf.format(Calendar.getInstance().time)
+        readPrice(cbxMeal)
+        var booking = DataClassBooking(fromDate, cbxMeal.isChecked, numOfGuest, toDate, total, other, currentDate.toString())
+        reference = database.getReference("Bookings")
+        reference.child(fromDate).child(type.split(" ")[0]).child(custID).push().setValue(booking).addOnSuccessListener {
+            Toast.makeText(activity, "New booking is added!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    private fun readCustID(){
+        reference = database.getReference("Customers")
+        reference.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (child in snapshot.children){
+                    if (child.child("ic").getValue(String::class.java).equals(ic)){
+                        assignCustID(child.key.toString())
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("cancel", "Failed to load customer data", error.toException())
+            }
+        })
+    }
+    private fun assignCustID(id:String){
+        custID = id
+    }
+
+    override fun onPause() {
+
+        super.onPause()
     }
 
 }

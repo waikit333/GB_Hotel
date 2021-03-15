@@ -1,11 +1,17 @@
 package com.example.goldenbeachhotelmanagementsystem
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.goldenbeachhoteldataclasses.DataClassBooking
+import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceItem
 
-class BookingRecyclerAdapter (){//: RecyclerView.Adapter<RecyclerView.ViewHolder> (){
+class BookingRecyclerAdapter (private val context: Context,
+                              private val dataset: List<DataClassBooking>,
+                              private val fragmentManager: FragmentManager){//: RecyclerView.Adapter<RecyclerView.ViewHolder> (){
     /*override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PhotoHolder {
         TODO("Not yet implemented")
     }

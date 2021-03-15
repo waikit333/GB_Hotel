@@ -89,7 +89,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="200dp"
                 app:errorEnabled="true"
-                app:counterMaxLength="11"
+                app:counterMaxLength="1"
                 android:textAppearance="@style/errorText">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="160dp"
@@ -111,7 +111,7 @@
                 android:textAppearance="@style/errorText">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="360dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
                     android:hint="@string/email"
@@ -120,6 +120,17 @@
                     android:textSize="20dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/btnSearchCust"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="300dp"
+                android:layout_toEndOf="@+id/txtEmail"
+                android:backgroundTint="@color/button_color_green"
+                android:text="@string/btnSearch"
+                android:textColor="@color/white"
+                />
 
             <TextView
                 style="?android:attr/listSeparatorTextViewStyle"
@@ -241,7 +252,6 @@
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
                     android:gravity="top|left"
                     android:hint="@string/other_guest"
                     android:inputType="textMultiLine"

@@ -1,90 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home_menu_staff"
     android:background="@android:color/transparent"
-    >
+    tools:context=".home_menu_staff">
 
-    <TextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="95dp"
-        android:text="@string/welcome_message"
-        android:textAppearance="@style/palaBoldBrownText"
-        android:textSize="22dp"
-        app:layout_constraintStart_toEndOf="@+id/imgIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icons8_beach_50" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvWelcome"
+            android:layout_width="340dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="70dp"
+            android:backgroundTint="@color/item_background_yellow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="95dp"
-        android:text="name"
-        android:textAppearance="@style/palaBoldBrownText"
-        android:textSize="22dp"
-        app:layout_constraintStart_toEndOf="@+id/txtWelcome"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/btnBooking"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/booking"
-        app:layout_constraintStart_toEndOf="@+id/include"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+                <ImageView
+                    android:id="@+id/imgIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    app:srcCompat="@drawable/icons8_beach_50" />
 
-    <ImageButton
-        android:id="@+id/btnCheckInOut"
-        android:layout_width="151dp"
-        android:layout_height="152dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/checkin_checkout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toEndOf="@+id/btnBooking"
-        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+                <TextView
+                    android:id="@+id/txtWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/welcome_message"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="22dp" />
 
-    <ImageButton
-        android:id="@+id/btnRoomManagement"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roommanagement"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="name"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="22dp" />
+            </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/btnRoomService"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roomservice"
-        app:layout_constraintStart_toEndOf="@+id/btnRoomManagement"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="340dp"
+            android:layout_height="470dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/item_background_yellow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvWelcome">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp">
+
+                <ImageButton
+                    android:id="@+id/btnBooking"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/booking"
+                    app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+
+                <ImageButton
+                    android:id="@+id/btnCheckInOut"
+                    android:layout_width="151dp"
+                    android:layout_height="152dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/checkin_checkout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageButton
+                    android:id="@+id/btnRoomManagement"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="250dp"
+                    android:background="@drawable/roommanagement"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+
+                <ImageButton
+                    android:id="@+id/btnRoomService"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="250dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/roomservice"
+                    app:layout_constraintStart_toEndOf="@+id/btnRoomManagement"
+                    app:layout_constraintTop_toBottomOf="@+id/btnCheckInOut" />
+            </LinearLayout>
 
 
+        </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
