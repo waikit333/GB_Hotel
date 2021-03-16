@@ -14,14 +14,14 @@
         <activity
             android:name=".RoomServiceItems"
             android:label="@string/title_activity_room_service_items"
-            android:parentActivityName=".Home"
+            android:parentActivityName=".RoomService"
             android:theme="@style/Theme.GoldenBeachHotelManagementSystem.NoActionBar" />
         <activity
             android:name=".RoomService"
             android:parentActivityName=".Home" />
         <activity
             android:name=".CheckIns"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".CheckInCheckOutMenu" />
         <activity
             android:name=".Booking"
             android:parentActivityName=".Home" />
