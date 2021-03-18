@@ -16,9 +16,7 @@ class SplashScreen : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler().postDelayed({
-            val intent = Intent(this, Home::class.java)
-            intent.putExtra("type","Staff")
-            intent.putExtra("name","Staff")
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()

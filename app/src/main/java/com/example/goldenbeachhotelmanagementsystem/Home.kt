@@ -6,22 +6,16 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.example.goldenbeachhoteldataclasses.DataClassRoom
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.helperclasses.Helper
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 
@@ -30,14 +24,14 @@ class Home : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var homeNavView: NavigationView
-    private lateinit var toggle: ActionBarDrawerToggle
-    private var homeNavListenerIsRegister = false
-    private var helper = helper()
+    private var helper = Helper()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
 
+        //Navigation Drawer
         toolbar = findViewById(R.id.toolbar)
         drawerLayout = findViewById(R.id.home_layout)
         homeNavView = findViewById(R.id.homeNavView)
@@ -93,36 +87,21 @@ class Home : AppCompatActivity() {
         if (bundle != null) {
             type = bundle.getString("type")
         }
-
-        if (type!! == "Manager") {
+        replaceFragment(home_menu_staff())
+        /*if (type!! == "Manager") {
             replaceFragment(home_menu_manager())
         } else if (type == "Admin") {
             replaceFragment(home_menu_admin())
         } else {
             replaceFragment(home_menu_staff())
-        }
-
+        }*/
     }
 
-    override fun onResume() {
-        helper.changeNavIconAndTitle(supportActionBar,true,toolbar,drawerLayout,this,getString(R.string.hotel_name))
-        super.onResume()
-    }
+
+
     fun fabOnClick(v: View) {
-        val downtool = findViewById<BottomAppBar>(R.id.bottomAppBar)
-        downtool.visibility = View.INVISIBLE
-        toolbar?.title = getString(R.string.addNewBooking)
-        helper.changeNavIconAndTitle(supportActionBar,false,toolbar,drawerLayout,this,getString(R.string.addNewBooking))
-        val fabAddNewBooking = findViewById<FloatingActionButton>(R.id.fabAddBooking)
-        fabAddNewBooking.visibility = View.INVISIBLE
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        var fragment = AddNewBooking()
-        transaction.addToBackStack(null)
-
-        transaction.replace(R.id.homeView, fragment, "MY_FRAGMENT")
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.commit()
+        val intent = Intent(this, AddNewBooking::class.java)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {
@@ -130,10 +109,6 @@ class Home : AppCompatActivity() {
         val myFragment: Fragment? =
             supportFragmentManager.findFragmentByTag("MY_FRAGMENT") as Fragment?
         if (myFragment != null && myFragment.isVisible()) {
-            val fabAddNewBooking = findViewById<FloatingActionButton>(R.id.fabAddBooking)
-            fabAddNewBooking.visibility = View.VISIBLE
-            val downtool = findViewById<BottomAppBar>(R.id.bottomAppBar)
-            downtool.visibility = View.VISIBLE
             super.onBackPressed()
             return
         } else if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

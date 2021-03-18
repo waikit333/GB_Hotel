@@ -1,28 +1,20 @@
 package com.example.goldenbeachhotelmanagementsystem
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.Sampler
-import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.cardview.widget.CardView
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goldenbeachhoteladapters.BookingRecyclerAdapter
-import com.example.goldenbeachhoteladapters.RoomServiceCategoryAdapter
-import com.example.goldenbeachhoteldataclasses.DataClassBooking
 import com.example.goldenbeachhoteldataclasses.DataClassBookingItem
-import com.example.goldenbeachhoteldataclasses.DataClassCustomer
-import com.example.goldenbeachhoteldataclasses.DataClassRoomServiceCategory
+import com.example.helperclasses.Helper
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -33,7 +25,7 @@ class Booking : AppCompatActivity() {
     private lateinit var myAdapter: BookingRecyclerAdapter
     private lateinit var bookingList: MutableList<DataClassBookingItem>
     private lateinit var rvBooking: RecyclerView
-    private lateinit var helper: helper
+    private lateinit var helper: Helper
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var svBooking: SearchView
@@ -42,10 +34,10 @@ class Booking : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         //show action bar with back arrow
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         drawerLayout = findViewById(R.id.bookingDrawerLayout)
         setSupportActionBar(toolbar)
-        helper = helper()
+        helper = Helper()
         helper.changeNavIconAndTitle(
             supportActionBar,
             false,
@@ -68,15 +60,6 @@ class Booking : AppCompatActivity() {
         )
         svBooking = findViewById(R.id.svBooking)
 
-    }
-
-    fun addNewBookingOnClick(v: View) {
-        val intent = Intent(this, AddNewBookingCointainer::class.java)
-        startActivity(intent)
-    }
-
-    override fun onStart() {
-        super.onStart()
         if (svBooking != null) {
             svBooking.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -92,6 +75,38 @@ class Booking : AppCompatActivity() {
 
             })
         }
+
+    }
+
+
+    fun addNewBookingOnClick(v: View) {
+        val intent = Intent(this, AddNewBooking::class.java)
+        startActivity(intent)
+    }
+
+    fun btnSortOnClick(v: View) {
+        showSortDialog()
+    }
+
+    private fun showSortDialog(){
+        val sortOptions = arrayOf("Newest","Oldest")
+        val builder = AlertDialog.Builder(this)
+        var sortAdapter:BookingRecyclerAdapter
+        with(builder){
+            setTitle("Sort by:")
+            setIcon(R.drawable.icon_material_sort)
+            setItems(sortOptions){ _, which ->
+                if(which == 0){
+                    bookingList.sortByDescending { it.bookingDate }
+                }
+                else{
+                    bookingList.sortBy { it.bookingDate }
+                }
+                sortAdapter = BookingRecyclerAdapter(this@Booking,bookingList)
+                rvBooking.adapter = sortAdapter
+            }
+        }
+        builder.show()
     }
 
     private fun search(query:String,submit:Boolean){

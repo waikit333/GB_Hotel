@@ -1,2 +1,5 @@
+include ':additionnal'
+include ':mail'
+include ':activation'
 include ':app'
 rootProject.name = "Golden Beach Hotel Management System"

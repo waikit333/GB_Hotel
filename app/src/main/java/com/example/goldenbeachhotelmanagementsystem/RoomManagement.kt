@@ -10,9 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.database.*
 import com.example.goldenbeachhoteldataclasses.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import org.json.JSONObject
+import com.example.helperclasses.Helper
 
 class RoomManagement : AppCompatActivity() {
     private var selectedFloor = 1
@@ -37,7 +35,7 @@ class RoomManagement : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val drawerLayout = findViewById<DrawerLayout>(R.id.roomManagermentDrawerLayout)
         setSupportActionBar(toolbar)
-        var helper = helper()
+        var helper = Helper()
         helper.changeNavIconAndTitle(supportActionBar,false,toolbar,drawerLayout, this,getString(R.string.roomManagement))
 
         val floorSpinner = findViewById<Spinner>(R.id.floorSpinner)

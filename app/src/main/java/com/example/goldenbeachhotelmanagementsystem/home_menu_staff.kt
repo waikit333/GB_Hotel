@@ -8,28 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
+    private lateinit var txtName:TextView
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_home_menu_staff, container,
             false)
         val btnBooking = view?.findViewById<ImageButton>(R.id.btnBooking)
+        txtName = view?.findViewById(R.id.txtName)
 
-        var name :String? = ""
-        val bundle :Bundle ?=arguments
-        if (bundle!=null){
-            name = bundle.getString("name")
-        }
-        var txtName = view?.findViewById<TextView>(R.id.txtName)
-        if (txtName != null) {
-            txtName.text = name
-        }
+        readName()
 
         if (btnBooking != null) {
             btnBooking.setOnClickListener(){
@@ -62,4 +57,11 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         return view
     }
 
+    private fun readName(){
+        val database = FirebaseDatabase.getInstance()
+        val auth = FirebaseAuth.getInstance()
+        database.getReference("Users").child(auth.uid.toString()).get().addOnSuccessListener {
+            txtName.text = it.child("name").value.toString()
+        }
+    }
 }

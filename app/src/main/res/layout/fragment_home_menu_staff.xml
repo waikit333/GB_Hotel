@@ -29,7 +29,6 @@
                     android:id="@+id/imgIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
                     android:layout_marginTop="15dp"
                     app:srcCompat="@drawable/icons8_beach_50" />
 
@@ -37,7 +36,7 @@
                     android:id="@+id/txtWelcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="30dp"
                     android:text="@string/welcome_message"
                     android:textAppearance="@style/palaBoldBrownText"
@@ -45,11 +44,11 @@
 
                 <TextView
                     android:id="@+id/txtName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="30dp"
-                    android:text="name"
+                    android:text=""
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="22dp" />
             </LinearLayout>
