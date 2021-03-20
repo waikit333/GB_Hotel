@@ -14,6 +14,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.helperclasses.Helper
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +42,11 @@ class Home : AppCompatActivity() {
         homeNavView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
+                    replaceFragment(home_menu_staff())
+                    true
+                }
+                R.id.nav_profile -> {
+                    replaceFragment(Profile())
                     true
                 }
                 R.id.nav_booking -> {
@@ -95,8 +102,22 @@ class Home : AppCompatActivity() {
         } else {
             replaceFragment(home_menu_staff())
         }*/
-    }
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomAppBarNav)
+        bottomNav.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.home ->{
+                    replaceFragment(home_menu_staff())
+                    true
+                }
+                R.id.profile ->{
+                    replaceFragment(Profile())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
 
     fun fabOnClick(v: View) {
@@ -138,11 +159,8 @@ class Home : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.navigation_drawer, menu)
+
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        item
-        return super.onOptionsItemSelected(item)
-    }
 }
