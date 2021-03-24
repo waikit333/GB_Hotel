@@ -53,6 +53,7 @@ class RoomServiceItems : AppCompatActivity() {
                     if (items.child(i).exists()) {
                         val item = items.child(i).getValue(DataClassRoomServiceItem::class.java)
                         if (item != null) {
+                            item.id = i;
                             itemList.add(item)
                         }
                     }

@@ -32,6 +32,7 @@
             android:text="Quantity: " />
 
         <EditText
+            android:id="@+id/quantityPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -109,6 +110,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/cancelOrderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
@@ -116,6 +118,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
+            android:id="@+id/confirmOrderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Order"

@@ -42,6 +42,7 @@ class RoomServiceItemAdapter(
             val args = Bundle()
             args.putString("name", item.name)
             args.putString("price", item.price.toString())
+            args.putString("id",item.id)
             dialog.arguments = args
             dialog.show(fragmentManager, "Name")
         }
