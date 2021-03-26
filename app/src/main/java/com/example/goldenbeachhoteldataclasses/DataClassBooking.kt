@@ -3,7 +3,7 @@ import com.google.firebase.database.Exclude
 
 data class DataClassBooking(
     var from:String? = "0", var hotelMeal:Boolean? = true, var numOfGuest: Int? = 0,  var to:String?= "",
-    var total:Double? = 0.00,var otherGuest:String? = "",var bookingDate:String? =""){
+    var total:Double? = 0.00,var otherGuest:String? = "",var bookingDate:String? ="", var status:String? = "Booked"){
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(

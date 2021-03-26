@@ -117,6 +117,17 @@ class Home : AppCompatActivity() {
                 else -> false
             }
         }
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.logout -> {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this, Login::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
 

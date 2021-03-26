@@ -17,7 +17,18 @@ import javax.mail.internet.MimeMessage
 class GmailSender(private val user: String, private val password: String) : Authenticator() {
     private val mailhost = "smtp.gmail.com"
     private val session: Session
-
+    init {
+        val props = Properties()
+        props.setProperty("mail.transport.protocol", "smtp")
+        props.setProperty("mail.host", mailhost)
+        props["mail.smtp.auth"] = "true"
+        props["mail.smtp.port"] = "465"
+        props["mail.smtp.socketFactory.port"] = "465"
+        props["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
+        props["mail.smtp.socketFactory.fallback"] = "false"
+        props.setProperty("mail.smtp.quitwait", "false")
+        session = Session.getDefaultInstance(props, this)
+    }
     companion object {
         init {
             Security.addProvider(JSSEProvider())
@@ -28,26 +39,21 @@ class GmailSender(private val user: String, private val password: String) : Auth
         return PasswordAuthentication(user, password)
     }
 
-    @Synchronized
-    @Throws(Exception::class)
     fun sendMail(subject: String?, body: String, sender: String?, recipients: String) {
         try {
             val message = MimeMessage(session)
-            val handler: DataHandler = DataHandler(
+            val handler = DataHandler(
                 ByteArrayDataSource(body.toByteArray(), "text/plain")
             )
             message.sender = InternetAddress(sender)
             message.subject = subject
             message.dataHandler = handler
-            if (recipients.indexOf(',') > 0) message.setRecipients(
-                Message.RecipientType.TO,
-                InternetAddress.parse(recipients)
-            ) else message.setRecipient(
+            message.setRecipient(
                 Message.RecipientType.TO, InternetAddress(recipients)
             )
             Transport.send(message)
         } catch (e: Exception) {
-            Log.d("Error", "sendingMailError" + e.message)
+            e.printStackTrace()
         }
     }
 
@@ -87,16 +93,5 @@ class GmailSender(private val user: String, private val password: String) : Auth
         }
     }
 
-    init {
-        val props = Properties()
-        props.setProperty("mail.transport.protocol", "smtp")
-        props.setProperty("mail.host", mailhost)
-        props["mail.smtp.auth"] = "true"
-        props["mail.smtp.port"] = "465"
-        props["mail.smtp.socketFactory.port"] = "465"
-        props["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
-        props["mail.smtp.socketFactory.fallback"] = "false"
-        props.setProperty("mail.smtp.quitwait", "false")
-        session = Session.getDefaultInstance(props, this)
-    }
+
 }

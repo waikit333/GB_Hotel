@@ -1,25 +1,27 @@
 package com.example.goldenbeachhotelmanagementsystem
 
 import android.app.DatePickerDialog
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.helperclasses.*
 import com.example.goldenbeachhoteldataclasses.DataClassBooking
 import com.example.goldenbeachhoteldataclasses.DataClassCustomer
+import com.example.helperclasses.*
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.*
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+@Suppress("DEPRECATION")
 class AddNewBooking : AppCompatActivity() {
     private var other = ""
     val HOTEL_MEAL_PRICE = 90
@@ -34,6 +36,7 @@ class AddNewBooking : AppCompatActivity() {
     var custID = ""
     var total = 0.00
     private var type = ""
+    private var counter = 0
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private lateinit var reference: DatabaseReference
     private lateinit var txtBtnFrom: TextView
@@ -48,6 +51,7 @@ class AddNewBooking : AppCompatActivity() {
     private lateinit var numOfGuestSpinner: Spinner
     private lateinit var txtOtherGuest: TextInputLayout
     private lateinit var cbxMeal: CheckBox
+    private var available: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
@@ -165,46 +169,34 @@ class AddNewBooking : AppCompatActivity() {
     fun btnAddOnClick(v: View) {
         confirm()
     }
-    private fun sendEmail(){
-        val senderEmail = "bait2073mad@gmail.com"
-        val password = "bait2073"
-        val sender = GmailSender(senderEmail, password)
-        val subject = "Your booking on $fromDate is confirmed!"
-        val message = "Dear, $lastName \n" +
-                "Thank you for booking at " + getString(R.string.hotel_name) +
-                "We have received your booking on $fromDate to $toDate."
-        try {
-            sender.sendMail(subject,message,senderEmail,email)
-        }catch (ex:Exception){
-            Log.d("Email Sending Exception", ex.toString())
-        }
 
-    }
 
     fun btnToOnClick(v: View) {
+        toDate = ""
         val cal = Calendar.getInstance()
         var year = cal.get(Calendar.YEAR)
         var month = cal.get(Calendar.MONTH)
         var day = cal.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(
             this,
-            android.app.DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDayOfMonth ->
+            { _, mYear, mMonth, mDayOfMonth ->
                 toDate = mDayOfMonth.toString().padStart(2, '0') + (mMonth + 1).toString()
                     .padStart(2, '0') + mYear
-                val from = java.util.Calendar.getInstance()
-                val to = java.util.Calendar.getInstance()
+                val from = Calendar.getInstance()
+                val to = Calendar.getInstance()
                 to.set(mYear, mMonth, mDayOfMonth)
-                val currentDate = java.util.Calendar.getInstance()
+                val currentDate = Calendar.getInstance()
                 if (to.before(currentDate)) {
                     txtBtnTo.text = getString(R.string.less_than_today_error)
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         txtBtnTo.setTextAppearance(R.style.errorText)
                     }
                 } else {
                     txtBtnTo.text = toDate
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         txtBtnTo.setTextAppearance(R.style.palaBrownText)
                     }
+                    readPrice()
                 }
 
             },
@@ -212,16 +204,18 @@ class AddNewBooking : AppCompatActivity() {
             month,
             day
         ).show()
+
     }
 
     fun btnFromOnClick(v: View) {
+        fromDate = ""
         val cal = Calendar.getInstance()
         var year = cal.get(Calendar.YEAR)
         var month = cal.get(Calendar.MONTH)
         var day = cal.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDayOfMonth ->
+            { _, mYear, mMonth, mDayOfMonth ->
                 fromDate = mDayOfMonth.toString().padStart(2, '0') + (mMonth + 1).toString()
                     .padStart(2, '0') + mYear
                 val from = Calendar.getInstance()
@@ -237,6 +231,7 @@ class AddNewBooking : AppCompatActivity() {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         txtBtnFrom.setTextAppearance(R.style.palaBrownText)
                     }
+                    readPrice()
                 }
             },
             year,
@@ -248,6 +243,10 @@ class AddNewBooking : AppCompatActivity() {
     fun btnSearchOnClick(v: View) {
         validateIC(txtIC)
         readCustID()
+        assignCustDetails()
+    }
+
+    private fun assignCustDetails() {
         if (!custID.isEmpty()) {
             reference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -291,7 +290,7 @@ class AddNewBooking : AppCompatActivity() {
     private fun validateFromDate(): Boolean {
         if (fromDate.isEmpty()) {
             txtBtnFrom.text = getString(R.string.required_error)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 txtBtnFrom.setTextAppearance(R.style.errorText)
             }
             return false
@@ -308,14 +307,14 @@ class AddNewBooking : AppCompatActivity() {
         }
         if (toDate.isEmpty()) {
             txtBtnTo.text = getString(R.string.required_error)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 txtBtnTo.setTextAppearance(R.style.errorText)
             }
             return false
         } else if (to?.before(from) == true && !toDate.isEmpty() && !fromDate.isEmpty()) {
 
             txtBtnTo.text = getString(R.string.less_than_from_error)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 txtBtnTo.setTextAppearance(R.style.errorText)
             }
             return false
@@ -417,17 +416,41 @@ class AddNewBooking : AppCompatActivity() {
         var validPhone = validatePhone(txtPhone)
         var validFrom = validateFromDate()
         var validTo = validateToDate()
+        readCustID()
+        assignCustDetails()
+        checkAvailablility()
         reference = database.getReference("Customers")
-        if (validEmail && validFirstName && validIC && validLastName && validOtherGuest && validPhone && validFrom && validTo) {
-            customer = DataClassCustomer(email, firstName, ic, lastName, phone)
-            if (custID.isEmpty()) {
-                var custRef = reference.push()
-                var newCustID = custRef.key.toString()
-                reference.child(newCustID).setValue(customer)
-
+        if (available) {
+            if (validEmail && validFirstName && validIC && validLastName && validOtherGuest && validPhone && validFrom && validTo) {
+                customer = DataClassCustomer(email, firstName, ic, lastName, phone)
+                if (custID.isEmpty()) {
+                    var custRef = reference.push()
+                    var newCustID = custRef.key.toString()
+                    reference.child(newCustID).setValue(customer)
+                    writeBooking(newCustID)
+                } else {
+                    writeBooking(custID)
+                }
+                val pLinear = findViewById<LinearLayout>(R.id.linearProgress)
+                val async = MyAsyncTask(pLinear)
+                async.execute()
             }
-            writeBooking()
-            sendEmail()
+        } else {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Selected room type is fully booked!")
+            builder.setMessage("$type on $fromDate is fully booked!")
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+            builder.setPositiveButton("Change") { dialogInterface, which ->
+                dialogInterface.dismiss()
+            }
+            builder.setNegativeButton("Dismiss") { dialogInterface, which ->
+                finish()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+
         }
     }
 
@@ -435,14 +458,35 @@ class AddNewBooking : AppCompatActivity() {
         var roomRef = database.getReference("Rooms")
         roomRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                total = snapshot.child(type).child("price").getValue(Double::class.java)!!
-                val txtTotal = findViewById<TextView>(R.id.txtTotal)
-                if (total != null) {
-                    if (cbxMeal.isChecked) {
-                        total += (HOTEL_MEAL_PRICE * numOfGuest)
+                if (fromDate.isNullOrEmpty() || toDate.isNullOrEmpty()) {
+                    total = snapshot.child(type).child("price").getValue(Double::class.java)!!
+                    val txtTotal = findViewById<TextView>(R.id.txtTotal)
+                    if (total != null) {
+                        if (cbxMeal.isChecked) {
+                            total += (HOTEL_MEAL_PRICE * numOfGuest)
+                        } else {
+                            total =
+                                snapshot.child(type).child("price").getValue(Double::class.java)!!
+                        }
+                        txtTotal?.text = "RM " + String.format("%.2f", total)
+                    }
+                } else {
+                    total = snapshot.child(type).child("price")
+                        .getValue(Double::class.java)!! * (toDate.substring(0, 2)
+                        .toInt() - fromDate.substring(0, 2).toInt())
+                    val txtTotal = findViewById<TextView>(R.id.txtTotal)
+                    if (total != null) {
+                        if (cbxMeal.isChecked) {
+                            total += (HOTEL_MEAL_PRICE * numOfGuest)
+                        } else {
+                            total = snapshot.child(type).child("price")
+                                .getValue(Double::class.java)!! * (toDate.substring(0, 2)
+                                .toInt() - fromDate.substring(0, 2).toInt())
+                        }
                         txtTotal?.text = "RM " + String.format("%.2f", total)
                     }
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -451,10 +495,11 @@ class AddNewBooking : AppCompatActivity() {
         })
     }
 
-    private fun writeBooking() {
+    private fun writeBooking(newCustID: String) {
         val sdf = SimpleDateFormat("ddMMyyyy")
         val currentDate = sdf.format(Calendar.getInstance().time)
         readPrice()
+
         var booking = DataClassBooking(
             fromDate,
             cbxMeal.isChecked,
@@ -465,7 +510,8 @@ class AddNewBooking : AppCompatActivity() {
             currentDate.toString()
         )
         reference = database.getReference("Bookings")
-        reference.child(fromDate).child(type.split(" ")[0]).child(custID).push().setValue(booking)
+        reference.child(fromDate).child(type.split(" ")[0]).child(newCustID).push()
+            .setValue(booking)
             .addOnSuccessListener {
                 Toast.makeText(this, "New booking is added!", Toast.LENGTH_LONG).show()
             }
@@ -493,4 +539,65 @@ class AddNewBooking : AppCompatActivity() {
         custID = id
     }
 
+    private fun checkAvailablility() {
+        available = false
+        val ref = database.getReference("Bookings")
+        ref.child(fromDate).child(type).get().addOnSuccessListener {
+            for (cust in it.children) {
+                for (booking in cust.children) {
+                    counter++
+                }
+            }
+            when (type) {
+                "Single Room" -> {
+                    if (counter < 10)
+                        available = true
+                }
+                "Double Room" -> {
+                    if (counter < 8)
+                        available = true
+                }
+                "Triple Room" -> {
+                    if (counter < 6)
+                        available = true
+                }
+                "Quad Room" -> {
+                    if (counter < 4)
+                        available = true
+                }
+            }
+        }
+
+    }
+
+
+    inner class MyAsyncTask(pLinear: LinearLayout) : AsyncTask<Void, Void, String>() {
+        private var linear: LinearLayout = pLinear
+        override fun doInBackground(vararg params: Void?): String? {
+            val senderEmail = "bait2073mad@gmail.com"
+            val password = "bait2073"
+            val sender = GmailSender(senderEmail, password)
+            val subject = "Your booking on $fromDate is confirmed!"
+            val message = "Dear, $lastName \n" +
+                    "Thank you for booking at " + getString(R.string.hotel_name) +
+                    "\nWe have received your booking on $fromDate to $toDate."
+            try {
+                sender.sendMail(subject, message, senderEmail, email)
+            } catch (ex: Exception) {
+                Log.d("Email Sending Exception", ex.toString())
+            }
+            return null
+        }
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            linear.visibility = View.VISIBLE
+
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            linear.visibility = View.GONE
+        }
+    }
 }

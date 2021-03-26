@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenBeachHotelManagementSystem">
-        <activity android:name=".Login"></activity>
+        <activity
+            android:name=".BookingDetails"
+            android:parentActivityName=".Booking"></activity>
+        <activity android:name=".Login" />
         <activity
             android:name=".AddNewBooking"
             android:parentActivityName=".Booking" />

@@ -26,6 +26,7 @@
     <string name="cleaning_status">Cleaning Status:</string>
     <string name="request">REQUEST CLEANING</string>
     <string name="customer_details">Customer Details</string>
+    <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="ic">IC:</string>
     <string name="contact_no">Contact No:</string>
@@ -100,4 +101,9 @@
     <string name="gender">Gender:</string>
     <string name="address">Address:</string>
     <string name="position">Position:</string>
+    <string name="title_activity_booking_details">Booking Details</string>
+    <string name="cancel_booking">Cancel Booking</string>
+    <string name="status">Status:</string>
+
+
 </resources>
