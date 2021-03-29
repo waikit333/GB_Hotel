@@ -104,6 +104,7 @@
     <string name="title_activity_booking_details">Booking Details</string>
     <string name="cancel_booking">Cancel Booking</string>
     <string name="status">Status:</string>
+    <string name="customer_name">Customer Name</string>
 
 
 </resources>

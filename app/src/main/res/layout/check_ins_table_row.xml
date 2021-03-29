@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+        <TextView
+            android:id="@+id/custName"
+            tools:text="Name"
+            android:layout_width="0dp"
+            android:layout_weight=".6"
+            android:text="testname"
+            />
+        <TextView
+            android:id="@+id/roomName"
+            android:layout_weight=".2"
+            android:layout_width="0dp"
+            tools:text="Room" />
+        <TextView
+            android:id="@+id/roomStatus"
+            android:layout_weight=".2"
+            android:layout_width="0dp"
+            tools:text="Status" />
+</TableRow>
