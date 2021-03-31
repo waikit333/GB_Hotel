@@ -10,7 +10,6 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.goldenbeachhoteldataclasses.DataClassCheckInItem
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +39,11 @@ class CheckIns : AppCompatActivity() {
 
 
         val dpd = DatePickerDialog(this, { view, year, monthOfYear, dayOfMonth ->
-            currentViewDate.text = dayOfMonth.toString() + monthOfYear.toString() + year.toString()
+            val calendar = Calendar.getInstance()
+            calendar.set(year,monthOfYear,dayOfMonth)
+            curDate = SimpleDateFormat("ddMMyyyy").format(calendar.time)
+            currentViewDate.text = SimpleDateFormat("dd MMMM yyyy").format(calendar.time)
+            loadTable()
         }, year, month, day)
 
 
@@ -71,10 +74,20 @@ class CheckIns : AppCompatActivity() {
                         database.getReference("Customers").child(custID).get().addOnSuccessListener {
                             custName = it.child("firstName").value.toString() + " " + it.child("lastName").value.toString()
 
-                            val tableRow = LayoutInflater.from(this).inflate(R.layout.check_ins_table_row, null) as TableRow
+                            val tableRow = LayoutInflater.from(this).inflate(
+                                R.layout.check_ins_table_row,
+                                null
+                            ) as TableRow
                             tableRow.findViewById<TextView>(R.id.custName).text = custName
                             tableRow.findViewById<TextView>(R.id.roomName).text = roomType
                             tableRow.findViewById<TextView>(R.id.roomStatus).text = status
+                            tableRow.setOnClickListener{
+                                val dialog = CheckInDialogFragment()
+                                val args = Bundle()
+//                              args.putString("name", item.name)
+//                              dialog.arguments = args
+                                dialog.show(supportFragmentManager, "Name")
+                            }
                             tableLayout.addView(tableRow)
                         }
                     }
