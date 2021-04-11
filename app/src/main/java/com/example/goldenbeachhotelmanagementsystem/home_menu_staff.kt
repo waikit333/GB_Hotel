@@ -12,9 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     private lateinit var txtName:TextView
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

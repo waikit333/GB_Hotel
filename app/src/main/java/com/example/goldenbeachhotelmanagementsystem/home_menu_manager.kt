@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    private lateinit var txtName:TextView
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,10 +25,9 @@ class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
         if (bundle!=null){
             name = bundle.getString("name")
         }
-        var txtName = view?.findViewById<TextView>(R.id.txtName)
-        if (txtName != null) {
-            txtName.text = name
-        }
+        txtName = view?.findViewById(R.id.txtName)
+
+        readName()
 
         val btnBooking = view?.findViewById<ImageButton>(R.id.btnBooking)
         if (btnBooking != null) {
@@ -59,15 +57,21 @@ class home_menu_manager : Fragment(R.layout.fragment_home_menu_manager) {
                 startActivity(intent)
             }
         }
-        val btnStaff = view?.findViewById<ImageButton>(R.id.btnStaff)
-        if (btnStaff != null) {
-            btnStaff.setOnClickListener(){
-                /*val intent = Intent(activity,Booking::class.java)
-                startActivity(intent)*/
+        val btnCreateAcc = view?.findViewById<ImageButton>(R.id.btnCreateAcc)
+        if (btnCreateAcc != null) {
+            btnCreateAcc.setOnClickListener(){
+                val intent = Intent(activity,CreateAccount::class.java)
+                startActivity(intent)
             }
         }
         return view
     }
 
-
+    private fun readName(){
+        val database = FirebaseDatabase.getInstance()
+        val auth = FirebaseAuth.getInstance()
+        database.getReference("Users").child(auth.uid.toString()).get().addOnSuccessListener {
+            txtName.text = it.child("name").value.toString()
+        }
+    }
 }

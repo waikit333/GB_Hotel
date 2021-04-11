@@ -42,7 +42,7 @@ class Home : AppCompatActivity() {
         homeNavView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
-                    replaceFragment(home_menu_staff())
+                    replaceFragment(null)
                     true
                 }
                 R.id.nav_profile -> {
@@ -94,14 +94,7 @@ class Home : AppCompatActivity() {
         if (bundle != null) {
             type = bundle.getString("type")
         }
-        replaceFragment(home_menu_staff())
-        /*if (type!! == "Manager") {
-            replaceFragment(home_menu_manager())
-        } else if (type == "Admin") {
-            replaceFragment(home_menu_admin())
-        } else {
-            replaceFragment(home_menu_staff())
-        }*/
+        replaceFragment(null)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomAppBarNav)
         bottomNav.setOnNavigationItemSelectedListener {
@@ -159,12 +152,35 @@ class Home : AppCompatActivity() {
 
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment?) {
+        val database = FirebaseDatabase.getInstance()
+        val auth = FirebaseAuth.getInstance()
         val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        fragment.arguments = intent.extras
-        transaction.replace(R.id.homeView, fragment)
-        transaction.commit()
+        if (fragment == null){
+            database.getReference("Users").child(auth.uid.toString()).get().addOnSuccessListener {
+                val type = it.child("accessLevel").value.toString()
+                if(type == "Manager"){
+                    val fragment = home_menu_manager()
+                    val transaction = manager.beginTransaction()
+                    fragment.arguments = intent.extras
+                    transaction.replace(R.id.homeView, fragment)
+                    transaction.commit()
+                }
+                else{
+                    val fragment = home_menu_staff()
+                    val transaction = manager.beginTransaction()
+                    fragment.arguments = intent.extras
+                    transaction.replace(R.id.homeView, fragment)
+                    transaction.commit()
+                }
+            }
+        }
+        else{
+            val transaction = manager.beginTransaction()
+            fragment.arguments = intent.extras
+            transaction.replace(R.id.homeView, fragment)
+            transaction.commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
