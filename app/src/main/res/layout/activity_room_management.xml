@@ -26,9 +26,10 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="285dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:backgroundTint="@color/item_background_yellow"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -63,11 +64,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="340dp"
             android:layout_height="195dp"
-            android:layout_marginStart="35dp"
             android:layout_marginTop="25dp"
             android:id="@+id/roomContainer"
             android:backgroundTint="@color/item_background_yellow"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/floorContainer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -740,8 +741,8 @@
             android:layout_width="340dp"
             android:layout_height="335dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:backgroundTint="@color/item_background_yellow"
             app:layout_constraintTop_toBottomOf="@id/roomContainer">
 

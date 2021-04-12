@@ -152,6 +152,10 @@ class Home : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        replaceFragment(null)
+    }
     private fun replaceFragment(fragment: Fragment?) {
         val database = FirebaseDatabase.getInstance()
         val auth = FirebaseAuth.getInstance()

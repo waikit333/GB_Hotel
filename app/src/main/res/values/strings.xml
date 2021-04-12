@@ -49,6 +49,10 @@
         <item>Triple Room</item>
         <item>Quad Room</item>
     </string-array>
+    <string-array name="type_of_position">
+        <item>Staff</item>
+        <item>Manager</item>
+    </string-array>
     <string-array name="floor_num">
         <item>1</item>
         <item>2</item>
@@ -104,7 +108,10 @@
     <string name="title_activity_booking_details">Booking Details</string>
     <string name="cancel_booking">Cancel Booking</string>
     <string name="status">Status:</string>
+    <string name="password">Create Password:</string>
+    <string name="confirmPassword">Confirm Password:</string>
+    <string name="staffDetails">Staff Personal Details</string>
     <string name="customer_name">Customer Name</string>
-
-
+    <string name="register">Register</string>
+    <string name="create_acc">Create Account</string>
 </resources>

@@ -15,11 +15,11 @@
             android:id="@+id/cvWelcome"
             android:layout_width="340dp"
             android:layout_height="80dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/item_background_yellow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_marginTop="30dp"
                     android:text="@string/welcome_message"
                     android:textAppearance="@style/palaBoldBrownText"
-                    android:textSize="22dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/txtName"
@@ -51,7 +51,7 @@
                     android:layout_marginTop="30dp"
                     android:text="name"
                     android:textAppearance="@style/palaBoldBrownText"
-                    android:textSize="22dp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -59,9 +59,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="340dp"
             android:layout_height="470dp"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/item_background_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvWelcome">
             <LinearLayout

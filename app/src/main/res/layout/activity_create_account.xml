@@ -1,9 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createAccDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".CreateAccount">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/createAccView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar_top"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="55dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/include">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/staffDetails"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="28dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtFirstName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="50dp"
+                    android:textAppearance="@style/errorText"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/first_name"
+                        android:inputType="textPersonName"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtLastName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_toEndOf="@id/createTxtFirstName"
+                    android:textAppearance="@style/errorText"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/last_name"
+                        android:inputType="textPersonName"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtIC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="130dp"
+                    android:textAppearance="@style/errorText"
+                    app:counterMaxLength="14"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/ic"
+                        android:inputType="text"
+                        android:maxLength="14"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="130dp"
+                    android:layout_toEndOf="@id/createTxtIC"
+                    android:textAppearance="@style/errorText"
+                    app:counterMaxLength="1"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/contact_no"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dob"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="210dp"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:id="@+id/createDOB"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="240dp"
+                    android:text="@string/pick_a_date"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pick_a_date"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/button_color_green"
+                    android:onClick="btnDOBOnClick"
+                    android:layout_marginTop="270dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/createBtnDOB"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/createTxtEmail"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="320dp"
+                    app:errorEnabled="true"
+                    android:textAppearance="@style/errorText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:textAppearance="@style/palaBrownText"
+                        android:textSize="20dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtPw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="400dp"
+                    android:textAppearance="@style/errorText"
+                    app:counterMaxLength="14"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/password"
+                        android:inputType="text"
+                        android:maxLength="14"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/createTxtConfirmPw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="400dp"
+                    android:layout_toEndOf="@id/createTxtIC"
+                    android:textAppearance="@style/errorText"
+                    app:counterMaxLength="1"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="@string/confirmPassword"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/createTxtAdd"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="480dp"
+                    app:errorEnabled="true"
+                    android:textAppearance="@style/errorText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:gravity="top|left"
+                        android:hint="@string/address"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:enabled="false"
+                        android:textAppearance="@style/palaBrownText"
+                        android:textSize="20dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/position"
+                    android:layout_marginTop="630dp"
+                    android:layout_marginStart="10dp"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp"/>
+                <Spinner
+                    android:id="@+id/position"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="660dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/dropdown_style"
+                    />
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="690dp"
+                    android:layout_toEndOf="@+id/position"
+                    android:backgroundTint="@color/button_color_green"
+                    android:text="@string/register"
+                    android:onClick="btnRegisterOnClick"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

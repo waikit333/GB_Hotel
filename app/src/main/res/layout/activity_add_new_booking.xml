@@ -131,7 +131,7 @@
                     android:textAppearance="@style/errorText">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="250dp"
+                        android:layout_width="230dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
                         android:hint="@string/email"
@@ -149,6 +149,7 @@
                     android:layout_toEndOf="@+id/txtEmail"
                     android:backgroundTint="@color/button_color_green"
                     android:text="@string/btnSearch"
+                    android:textSize="15dp"
                     android:onClick="btnSearchOnClick"
                     android:textColor="@color/white"
                     />
@@ -169,7 +170,7 @@
                     android:layout_marginTop="370dp"
                     android:layout_marginStart="10dp"
                     android:textAppearance="@style/palaBrownText"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
                 <Spinner
                     android:id="@+id/typeOfRoomSpinner"
                     android:layout_width="200dp"
@@ -186,7 +187,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_toEndOf="@+id/typeOfRoomSpinner"
                     android:textAppearance="@style/palaBrownText"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
                 <Spinner
                     android:id="@+id/numOfGuestSpinner"
                     android:layout_width="100dp"
