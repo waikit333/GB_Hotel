@@ -39,6 +39,7 @@ class Login : AppCompatActivity() {
                     val intent = Intent(this, Home::class.java)
                     startActivity(intent)
                 } else {
+                    loading.visibility = View.INVISIBLE
                     Toast.makeText(baseContext, "Login failed. Please ensure that you enter the correct email and password", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -12,6 +12,16 @@
         android:id="@+id/createAccView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+        <ProgressBar
+            android:id="@+id/registerProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"/>
 
         <include
             android:id="@+id/include"
@@ -36,7 +46,7 @@
                     android:layout_marginTop="0dp"
                     android:text="@string/staffDetails"
                     android:textAppearance="@style/palaBoldBrownText"
-                    android:textSize="28dp" />
+                    android:textSize="24dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/createTxtFirstName"
@@ -60,7 +70,7 @@
                     android:id="@+id/createTxtLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="50dp"
                     android:layout_toEndOf="@id/createTxtFirstName"
                     android:textAppearance="@style/errorText"
@@ -99,7 +109,7 @@
                     android:id="@+id/createTxtPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="130dp"
                     android:layout_toEndOf="@id/createTxtIC"
                     android:textAppearance="@style/errorText"
@@ -120,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/dob"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="210dp"
+                    android:layout_marginTop="215dp"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"/>
                 <TextView
@@ -143,6 +153,36 @@
                     android:layout_marginStart="10dp"
                     android:id="@+id/createBtnDOB"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="215dp"
+                    android:layout_toEndOf="@+id/createTxtIC"
+                    android:textAppearance="@style/palaBrownText"
+                    android:textSize="20dp"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="240dp"
+                    android:layout_marginStart="30dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/radioGender"
+                    android:layout_toEndOf="@+id/createTxtIC">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        android:textAppearance="@style/palaBrownText"
+                        android:textSize="15dp" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        android:textAppearance="@style/palaBrownText"
+                        android:textSize="15dp"/>
+                </RadioGroup>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -170,14 +210,15 @@
                     android:layout_marginTop="400dp"
                     android:textAppearance="@style/errorText"
                     app:counterMaxLength="14"
-                    app:errorEnabled="true">
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
                         android:hint="@string/password"
-                        android:inputType="text"
+                        android:inputType="textPassword"
                         android:maxLength="14"
                         android:textSize="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -191,14 +232,15 @@
                     android:layout_toEndOf="@id/createTxtIC"
                     android:textAppearance="@style/errorText"
                     app:counterMaxLength="1"
-                    app:errorEnabled="true">
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
                         android:hint="@string/confirmPassword"
-                        android:inputType="phone"
+                        android:inputType="textPassword"
                         android:maxLength="11"
                         android:textSize="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -209,6 +251,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="480dp"
                     app:errorEnabled="true"
+
                     android:textAppearance="@style/errorText">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -219,7 +262,6 @@
                         android:hint="@string/address"
                         android:inputType="textMultiLine"
                         android:lines="3"
-                        android:enabled="false"
                         android:textAppearance="@style/palaBrownText"
                         android:textSize="20dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -243,15 +285,19 @@
                     android:id="@+id/btnRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
+                    android:layout_marginStart="40dp"
                     android:layout_marginTop="690dp"
                     android:layout_toEndOf="@+id/position"
                     android:backgroundTint="@color/button_color_green"
                     android:text="@string/register"
                     android:onClick="btnRegisterOnClick"
                     android:textColor="@color/white" />
+
+
             </RelativeLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

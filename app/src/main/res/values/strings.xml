@@ -114,4 +114,9 @@
     <string name="customer_name">Customer Name</string>
     <string name="register">Register</string>
     <string name="create_acc">Create Account</string>
+    <string name="password_format_error">Password must contains >6 characters, at least a letter and a number</string>
+    <string name="password_not_match">Passwords are not the same</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="dobError">DOB must not more than today date</string>
 </resources>
