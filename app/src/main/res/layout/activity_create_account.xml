@@ -169,13 +169,15 @@
                     android:layout_marginStart="30dp"
                     android:orientation="horizontal"
                     android:id="@+id/radioGender"
-                    android:layout_toEndOf="@+id/createTxtIC">
+                    android:layout_toEndOf="@+id/createTxtIC"
+                    android:checkedButton="@id/radioMale">
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/male"
                         android:textAppearance="@style/palaBrownText"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:id="@+id/radioMale"/>
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 @Suppress("DEPRECATION")
@@ -36,7 +37,6 @@ class AddNewBooking : AppCompatActivity() {
     var custID = ""
     var total = 0.00
     private var type = ""
-    private var counter = 0
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private lateinit var reference: DatabaseReference
     private lateinit var txtBtnFrom: TextView
@@ -51,7 +51,6 @@ class AddNewBooking : AppCompatActivity() {
     private lateinit var numOfGuestSpinner: Spinner
     private lateinit var txtOtherGuest: TextInputLayout
     private lateinit var cbxMeal: CheckBox
-    private var available: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
@@ -242,49 +241,67 @@ class AddNewBooking : AppCompatActivity() {
 
     fun btnSearchOnClick(v: View) {
         validateIC(txtIC)
-        readCustID()
         assignCustDetails()
     }
 
     private fun assignCustDetails() {
-        if (!custID.isEmpty()) {
-            reference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (cust in snapshot.children) {
-                        if (cust.key.equals(custID)) {
-                            txtEmail.editText?.setText(
-                                cust.child("email").getValue(String::class.java).toString()
-                            )
-                            txtFirstName.editText?.setText(
-                                cust.child("firstName").getValue(String::class.java)
-                                    .toString()
-                            )
-                            txtLastName.editText?.setText(
-                                cust.child("lastName").getValue(String::class.java)
-                                    .toString()
-                            )
-                            txtPhone.editText?.setText(
-                                cust.child("phone").getValue(String::class.java).toString()
-                            )
-                        }
+        val context = this
+        reference = database.getReference("Customers")
+        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (child in snapshot.children) {
+                    if (child.child("ic").getValue(String::class.java).equals(ic)) {
+                        assignCustID(child.key.toString())
                     }
                 }
+                reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var isExist = false
+                        for (cust in snapshot.children) {
+                            if (cust.key.equals(custID)) {
+                                isExist = true
+                                txtEmail.editText?.setText(
+                                    cust.child("email").getValue(String::class.java).toString()
+                                )
+                                txtFirstName.editText?.setText(
+                                    cust.child("firstName").getValue(String::class.java)
+                                        .toString()
+                                )
+                                txtLastName.editText?.setText(
+                                    cust.child("lastName").getValue(String::class.java)
+                                        .toString()
+                                )
+                                txtPhone.editText?.setText(
+                                    cust.child("phone").getValue(String::class.java).toString()
+                                )
+                            }
+                        }
+                        if (!isExist){
+                            Toast.makeText(
+                                context, "No record found! Please fill in all the customer details",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
 
-                override fun onCancelled(error: DatabaseError) {
+                    override fun onCancelled(error: DatabaseError) {
 
-                }
+                    }
 
-            })
-        } else {
-            Toast.makeText(
-                this, "No record found! Please fill in all the customer details",
-                Toast.LENGTH_LONG
-            ).show()
-        }
+                })
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("cancel", "Failed to load customer data", error.toException())
+            }
+        })
+
     }
 
     private fun isLetters(string: String): Boolean {
-        return string.all { it.isLetter() }
+        return string.matches("^[ A-Za-z]+\$".toRegex())
     }
 
     private fun validateFromDate(): Boolean {
@@ -408,6 +425,12 @@ class AddNewBooking : AppCompatActivity() {
     }
 
     private fun confirm() {
+        if (txtEmail.editText?.text.isNullOrEmpty() || txtFirstName.editText?.text.isNullOrEmpty() || txtLastName.editText?.text.isNullOrEmpty()
+            || txtPhone.editText?.text.isNullOrEmpty()
+        ) {
+            assignCustDetails()
+        }
+        var available = true
         var validEmail = validateEmail(txtEmail)
         var validFirstName = validateFirstName(txtFirstName)
         var validIC = validateIC(txtIC)
@@ -416,42 +439,56 @@ class AddNewBooking : AppCompatActivity() {
         var validPhone = validatePhone(txtPhone)
         var validFrom = validateFromDate()
         var validTo = validateToDate()
-        readCustID()
-        assignCustDetails()
-        checkAvailablility()
-        reference = database.getReference("Customers")
-        if (available) {
-            if (validEmail && validFirstName && validIC && validLastName && validOtherGuest && validPhone && validFrom && validTo) {
-                customer = DataClassCustomer(email, firstName, ic, lastName, phone)
-                if (custID.isEmpty()) {
-                    var custRef = reference.push()
-                    var newCustID = custRef.key.toString()
-                    reference.child(newCustID).setValue(customer)
-                    writeBooking(newCustID)
-                } else {
-                    writeBooking(custID)
+
+        val ref = database.getReference("Bookings")
+        ref.child(fromDate).child(type).get().addOnSuccessListener {
+            var counter = 0
+            for (cust in it.children) {
+                for (booking in cust.children) {
+                    counter++
                 }
-                val pLinear = findViewById<LinearLayout>(R.id.linearProgress)
-                val async = MyAsyncTask(pLinear)
-                async.execute()
             }
-        } else {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Selected room type is fully booked!")
-            builder.setMessage("$type on $fromDate is fully booked!")
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-
-            builder.setPositiveButton("Change") { dialogInterface, which ->
-                dialogInterface.dismiss()
+            when (type) {
+                "Single Room" -> {
+                    if (counter >= 10)
+                        available = false
+                }
+                "Double Room" -> {
+                    if (counter >= 8)
+                        available = false
+                }
+                "Triple Room" -> {
+                    if (counter >= 6)
+                        available = false
+                }
+                "Quad Room" -> {
+                    if (counter >= 4)
+                        available = false
+                }
             }
-            builder.setNegativeButton("Dismiss") { dialogInterface, which ->
-                finish()
+            if (available) {
+                reference = database.getReference("Customers")
+                if (validEmail && validFirstName && validIC && validLastName && validOtherGuest && validPhone && validFrom && validTo) {
+                    customer = DataClassCustomer(email, firstName, ic, lastName, phone)
+                    if (custID.isEmpty()) {
+                        var custRef = reference.push()
+                        var newCustID = custRef.key.toString()
+                        reference.child(newCustID).setValue(customer)
+                        writeBooking(newCustID)
+                    } else {
+                        writeBooking(custID)
+                    }
+                    val pLinear = findViewById<LinearLayout>(R.id.linearProgress)
+                    val async = MyAsyncTask(pLinear)
+                    async.execute()
+                    finish()
+                }
+            } else {
+                availabilityDialog()
             }
-            val alertDialog: AlertDialog = builder.create()
-            alertDialog.setCancelable(false)
-            alertDialog.show()
-
         }
+
+
     }
 
     private fun readPrice() {
@@ -479,9 +516,13 @@ class AddNewBooking : AppCompatActivity() {
                         if (cbxMeal.isChecked) {
                             total += (HOTEL_MEAL_PRICE * numOfGuest)
                         } else {
+                            val sdf = SimpleDateFormat("ddMMyyyy")
+                            val to = sdf.parse(toDate)
+                            val from = sdf.parse(fromDate)
+                            val diff: Long = to.getTime() - from.getTime()
+                            val numOfDay = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
                             total = snapshot.child(type).child("price")
-                                .getValue(Double::class.java)!! * (toDate.substring(0, 2)
-                                .toInt() - fromDate.substring(0, 2).toInt())
+                                .getValue(Double::class.java)!! * numOfDay
                         }
                         txtTotal?.text = "RM " + String.format("%.2f", total)
                     }
@@ -510,7 +551,7 @@ class AddNewBooking : AppCompatActivity() {
             currentDate.toString()
         )
         reference = database.getReference("Bookings")
-        reference.child(fromDate).child(type.split(" ")[0]).child(newCustID).push()
+        reference.child(fromDate).child(type).child(newCustID).push()
             .setValue(booking)
             .addOnSuccessListener {
                 Toast.makeText(this, "New booking is added!", Toast.LENGTH_LONG).show()
@@ -518,58 +559,28 @@ class AddNewBooking : AppCompatActivity() {
     }
 
 
-    private fun readCustID() {
-        reference = database.getReference("Customers")
-        reference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (child in snapshot.children) {
-                    if (child.child("ic").getValue(String::class.java).equals(ic)) {
-                        assignCustID(child.key.toString())
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w("cancel", "Failed to load customer data", error.toException())
-            }
-        })
-    }
-
     private fun assignCustID(id: String) {
         custID = id
     }
 
-    private fun checkAvailablility() {
-        available = false
-        val ref = database.getReference("Bookings")
-        ref.child(fromDate).child(type).get().addOnSuccessListener {
-            for (cust in it.children) {
-                for (booking in cust.children) {
-                    counter++
-                }
-            }
-            when (type) {
-                "Single Room" -> {
-                    if (counter < 10)
-                        available = true
-                }
-                "Double Room" -> {
-                    if (counter < 8)
-                        available = true
-                }
-                "Triple Room" -> {
-                    if (counter < 6)
-                        available = true
-                }
-                "Quad Room" -> {
-                    if (counter < 4)
-                        available = true
-                }
-            }
+
+    private fun availabilityDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Selected room type is fully booked!")
+        builder.setMessage("$type on $fromDate is fully booked!")
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        builder.setPositiveButton("Change") { dialogInterface, which ->
+            dialogInterface.dismiss()
         }
+        builder.setNegativeButton("Dismiss") { dialogInterface, which ->
+            finish()
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
 
     }
-
 
     inner class MyAsyncTask(pLinear: LinearLayout) : AsyncTask<Void, Void, String>() {
         private var linear: LinearLayout = pLinear
@@ -578,7 +589,7 @@ class AddNewBooking : AppCompatActivity() {
             val password = "bait2073"
             val sender = GmailSender(senderEmail, password)
             val subject = "Your booking on $fromDate is confirmed!"
-            val message = "Dear, $lastName \n" +
+            val message = "Dear $lastName, \n" +
                     "Thank you for booking at " + getString(R.string.hotel_name) +
                     "\nWe have received your booking on $fromDate to $toDate."
             try {
