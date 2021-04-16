@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,7 +12,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.helperclasses.Helper
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +24,7 @@ class Home : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var homeNavView: NavigationView
     private var helper = Helper()
-
+    private lateinit var bottomNav:BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +84,14 @@ class Home : AppCompatActivity() {
             }
         }
 
-        helper.changeNavIconAndTitle(supportActionBar,true,toolbar,drawerLayout,this,getString(R.string.hotel_name))
+        helper.changeNavIconAndTitle(
+            supportActionBar,
+            true,
+            toolbar,
+            drawerLayout,
+            this,
+            getString(R.string.hotel_name)
+        )
 
         var type: String? = ""
         val bundle: Bundle? = intent.extras
@@ -96,14 +100,14 @@ class Home : AppCompatActivity() {
         }
         replaceFragment(null)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomAppBarNav)
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomAppBarNav)
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home ->{
-                    replaceFragment(home_menu_staff())
+                R.id.home -> {
+                    replaceFragment(null)
                     true
                 }
-                R.id.profile ->{
+                R.id.profile -> {
                     replaceFragment(Profile())
                     true
                 }
@@ -121,6 +125,7 @@ class Home : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 
 
@@ -134,14 +139,15 @@ class Home : AppCompatActivity() {
         val myFragment: Fragment? =
             supportFragmentManager.findFragmentByTag("MY_FRAGMENT") as Fragment?
         if (myFragment != null && myFragment.isVisible()) {
-            super.onBackPressed()
+            bottomNav.setSelectedItemId(R.id.home)
+            replaceFragment(null)
             return
         } else if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             if (pressedOnce) {
                 backToast.cancel()
-                super.onBackPressed()
+                finish()
                 return
             }
             pressedOnce = true
@@ -156,6 +162,7 @@ class Home : AppCompatActivity() {
         super.onResume()
         replaceFragment(null)
     }
+
     private fun replaceFragment(fragment: Fragment?) {
         val database = FirebaseDatabase.getInstance()
         val auth = FirebaseAuth.getInstance()
@@ -182,8 +189,7 @@ class Home : AppCompatActivity() {
         else{
             val transaction = manager.beginTransaction()
             fragment.arguments = intent.extras
-            transaction.replace(R.id.homeView, fragment)
-            transaction.commit()
+            transaction.replace(R.id.homeView, fragment,"MY_FRAGMENT").addToBackStack("MY_FRAGMENT").commit();
         }
     }
 

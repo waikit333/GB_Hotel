@@ -89,7 +89,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="logout">Logout</string>
-    <string name="booked_date">Booked Date:</string>
+    <string name="effective_date">Effective Date:</string>
     <string name="booking_date">Booking Date:</string>
     <string name="cust_name">Name:</string>
     <string name="default_price">RM 0.00</string>

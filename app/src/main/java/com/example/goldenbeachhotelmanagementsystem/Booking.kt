@@ -24,6 +24,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class Booking : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
@@ -34,6 +38,7 @@ class Booking : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var svBooking: SearchView
+    private var resume = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +99,14 @@ class Booking : AppCompatActivity() {
         showSortDialog()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(resume >0){
+            initRecycleView()
+        }
+        resume ++
+    }
+
     private fun showSortDialog() {
         val sortOptions = arrayOf("Newest", "Oldest")
         val builder = AlertDialog.Builder(this)
@@ -101,11 +114,12 @@ class Booking : AppCompatActivity() {
         with(builder) {
             setTitle("Sort by:")
             setIcon(R.drawable.icon_material_sort)
+
             setItems(sortOptions) { _, which ->
                 if (which == 0) {
-                    bookingList.sortByDescending { it.bookingDate }
+                    bookingList.sortByDescending { SimpleDateFormat("ddMMyyyy").parse(it.fromTo.toString().substring(0,8)).time}
                 } else {
-                    bookingList.sortBy { it.bookingDate }
+                    bookingList.sortBy {SimpleDateFormat("ddMMyyyy").parse(it.fromTo.toString().substring(0,8)).time}
                 }
                 sortAdapter = BookingRecyclerAdapter(this@Booking, bookingList)
                 rvBooking.adapter = sortAdapter
@@ -192,49 +206,7 @@ class Booking : AppCompatActivity() {
         })
     }
 
-    class BookingViewHolder(var bview: View) : RecyclerView.ViewHolder(bview) {
-        fun bind(bookingItem: DataClassBookingItem) {
-            val fromTo = bview.findViewById<TextView>(R.id.txtBookingFromTo)
-            val bookingDate = bview.findViewById<TextView>(R.id.txtBookingDate)
-            val custName = bview.findViewById<TextView>(R.id.txtCustName)
-            fromTo?.text = bookingItem.fromTo
-            bookingDate?.text = bookingItem.bookingDate
-            custName?.text = bookingItem.custName
-        }
-    }
 
-    private fun loadFirebase() {
-        var bQuery = database
-            .getReference("Booking")
-            .child("").child("categories")
-            .limitToLast(50)
 
-        val options = FirebaseRecyclerOptions.Builder<DataClassBookingItem>()
-            .setQuery(bQuery, DataClassBookingItem::class.java)
-            .setLifecycleOwner(this)
-            .build()
-        val adapter =
-            object : FirebaseRecyclerAdapter<DataClassBookingItem, BookingViewHolder>(options) {
-                override fun onCreateViewHolder(
-                    parent: ViewGroup,
-                    viewType: Int
-                ): BookingViewHolder {
-                    return BookingViewHolder(
-                        LayoutInflater.from(parent.context)
-                            .inflate(R.layout.item_booking, parent, false)
-                    )
-                }
-
-                override fun onBindViewHolder(
-                    holder: BookingViewHolder,
-                    position: Int,
-                    model: DataClassBookingItem
-                ) {
-                    holder.bind(model)
-                }
-
-            }
-
-    }
 
 }

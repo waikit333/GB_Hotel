@@ -137,7 +137,7 @@
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         android:textAppearance="@style/palaBrownText"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

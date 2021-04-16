@@ -25,6 +25,7 @@ class BookingDetails : AppCompatActivity() {
     private lateinit var txtFrom :TextView
     private lateinit var txtTo :TextView
     private lateinit var txtOthers :TextView
+    private lateinit var txtRoomID: TextView
     private lateinit var cbxMeal :CheckBox
     private lateinit var txtTotal :TextView
     private lateinit var txtStatus :TextView
@@ -60,6 +61,7 @@ class BookingDetails : AppCompatActivity() {
         txtTotal = findViewById(R.id.details_txtTotal)
         txtStatus = findViewById(R.id.details_txtStatus)
         txtBookingDate = findViewById(R.id.details_bookingDate)
+        txtRoomID = findViewById(R.id.details_roomID)
         database = FirebaseDatabase.getInstance()
         loadCustData()
         loadBookingData()
@@ -86,6 +88,7 @@ class BookingDetails : AppCompatActivity() {
             txtStatus.text = it.child("status").value.toString()
             txtBookingDate.text = it.child("bookingDate").value.toString()
             cbxMeal.isChecked = it.child("hotelMeal").value.toString().toBoolean()
+            txtRoomID.text = it.child("room").value.toString()
         }
     }
 
