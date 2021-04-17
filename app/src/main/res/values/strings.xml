@@ -119,4 +119,6 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="dobError">DOB must not more than today date</string>
+    <string name="totalRoomService">Total Room Service:</string>
+    <string name="totalRoom">Total Room:</string>
 </resources>

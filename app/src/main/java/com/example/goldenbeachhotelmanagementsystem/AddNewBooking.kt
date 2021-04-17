@@ -37,7 +37,7 @@ class AddNewBooking : AppCompatActivity() {
     private var fromDate = ""
     private var toDate = ""
     var custID = ""
-    var total = 0.00
+    var roomTotal = 0.00
     private var type = ""
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private lateinit var reference: DatabaseReference
@@ -565,35 +565,35 @@ class AddNewBooking : AppCompatActivity() {
         roomRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (fromDate.isNullOrEmpty() || toDate.isNullOrEmpty()) {
-                    total = snapshot.child(type).child("price").getValue(Double::class.java)!!
+                    roomTotal = snapshot.child(type).child("price").getValue(Double::class.java)!!
                     val txtTotal = findViewById<TextView>(R.id.txtTotal)
-                    if (total != null) {
+                    if (roomTotal != null) {
                         if (cbxMeal.isChecked) {
-                            total += (HOTEL_MEAL_PRICE * numOfGuest)
+                            roomTotal += (HOTEL_MEAL_PRICE * numOfGuest)
                         } else {
-                            total =
+                            roomTotal =
                                 snapshot.child(type).child("price").getValue(Double::class.java)!!
                         }
-                        txtTotal?.text = "RM " + String.format("%.2f", total)
+                        txtTotal?.text = "RM " + String.format("%.2f", roomTotal)
                     }
                 } else {
-                    total = snapshot.child(type).child("price")
+                    roomTotal = snapshot.child(type).child("price")
                         .getValue(Double::class.java)!! * (toDate.substring(0, 2)
                         .toInt() - fromDate.substring(0, 2).toInt())
                     val txtTotal = findViewById<TextView>(R.id.txtTotal)
-                    if (total != null) {
+                    if (roomTotal != null) {
                         if (cbxMeal.isChecked) {
-                            total += (HOTEL_MEAL_PRICE * numOfGuest)
+                            roomTotal += (HOTEL_MEAL_PRICE * numOfGuest)
                         } else {
                             val sdf = SimpleDateFormat("ddMMyyyy")
                             val to = sdf.parse(toDate)
                             val from = sdf.parse(fromDate)
                             val diff: Long = to.getTime() - from.getTime()
                             val numOfDay = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
-                            total = snapshot.child(type).child("price")
+                            roomTotal = snapshot.child(type).child("price")
                                 .getValue(Double::class.java)!! * numOfDay
                         }
-                        txtTotal?.text = "RM " + String.format("%.2f", total)
+                        txtTotal?.text = "RM " + String.format("%.2f", roomTotal)
                     }
                 }
 
@@ -614,9 +614,10 @@ class AddNewBooking : AppCompatActivity() {
             cbxMeal.isChecked,
             numOfGuest,
             toDate,
-            total,
+            roomTotal,
             other,
-            currentDate.toString()
+            currentDate.toString(),
+            roomTotal
         )
         reference = database.getReference("Bookings")
         reference.child(fromDate).child(type).child(newCustID).push()

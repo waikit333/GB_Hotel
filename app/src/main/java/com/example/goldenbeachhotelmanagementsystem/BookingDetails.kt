@@ -31,6 +31,9 @@ class BookingDetails : AppCompatActivity() {
     private lateinit var txtStatus :TextView
     private lateinit var txtBookingDate :TextView
     private lateinit var database: FirebaseDatabase
+    private lateinit var txtRoomServiceTotal :TextView
+    private lateinit var txtRoomTotal :TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking_details)
@@ -62,6 +65,8 @@ class BookingDetails : AppCompatActivity() {
         txtStatus = findViewById(R.id.details_txtStatus)
         txtBookingDate = findViewById(R.id.details_bookingDate)
         txtRoomID = findViewById(R.id.details_roomID)
+        txtRoomServiceTotal= findViewById(R.id.details_txtTotalRs)
+        txtRoomTotal= findViewById(R.id.details_txtTotalRoom)
         database = FirebaseDatabase.getInstance()
         loadCustData()
         loadBookingData()
@@ -83,8 +88,12 @@ class BookingDetails : AppCompatActivity() {
             if (!other.isNullOrEmpty()){
                 txtOthers.text = other
             }
+            val roomTotal = it.child("roomTotal").value
             val total = it.child("total").value
+            val rsTotal = it.child("roomServiceTotal").value
             txtTotal.text = "RM " +  String.format("%.2f", total.toString().toFloat())
+            txtRoomServiceTotal.text = "RM " +  String.format("%.2f", rsTotal.toString().toFloat())
+            txtRoomTotal.text = "RM " +  String.format("%.2f", roomTotal.toString().toFloat())
             txtStatus.text = it.child("status").value.toString()
             txtBookingDate.text = it.child("bookingDate").value.toString()
             cbxMeal.isChecked = it.child("hotelMeal").value.toString().toBoolean()
