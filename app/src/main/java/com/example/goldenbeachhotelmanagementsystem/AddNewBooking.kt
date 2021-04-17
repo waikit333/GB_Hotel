@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -89,6 +91,73 @@ class AddNewBooking : AppCompatActivity() {
         //Checkbox
         cbxMeal = findViewById(R.id.cbxMeal)
 
+        txtFirstName.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateFirstName()
+            }
+        })
+
+        txtLastName.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateLastName()
+            }
+        })
+        txtIC.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateIC()
+            }
+        })
+        txtPhone.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePhone()
+            }
+        })
+        txtEmail.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateEmail()
+            }
+        })
+        txtOtherGuest.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateOtherGuest()
+            }
+        })
         typeOfRoomSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -240,7 +309,7 @@ class AddNewBooking : AppCompatActivity() {
     }
 
     fun btnSearchOnClick(v: View) {
-        validateIC(txtIC)
+        validateIC()
         assignCustDetails()
     }
 
@@ -339,7 +408,7 @@ class AddNewBooking : AppCompatActivity() {
         return true
     }
 
-    private fun validateFirstName(txtFirstName: TextInputLayout): Boolean {
+    private fun validateFirstName(): Boolean {
         firstName = txtFirstName?.editText?.text.toString().trim()
         if (firstName.isEmpty()) {
             txtFirstName?.error = getString(R.string.required_error)
@@ -353,7 +422,7 @@ class AddNewBooking : AppCompatActivity() {
         }
     }
 
-    private fun validateLastName(txtLastName: TextInputLayout): Boolean {
+    private fun validateLastName(): Boolean {
         lastName = txtLastName?.editText?.text.toString().trim()
         if (lastName.isEmpty()) {
             txtLastName?.error = getString(R.string.required_error)
@@ -367,7 +436,7 @@ class AddNewBooking : AppCompatActivity() {
         }
     }
 
-    private fun validateIC(txtIC: TextInputLayout): Boolean {
+    private fun validateIC(): Boolean {
         ic = txtIC?.editText?.text.toString().trim()
         if (ic.isEmpty()) {
             txtIC?.error = getString(R.string.required_error)
@@ -381,7 +450,7 @@ class AddNewBooking : AppCompatActivity() {
         }
     }
 
-    private fun validatePhone(txtPhone: TextInputLayout): Boolean {
+    private fun validatePhone(): Boolean {
         phone = txtPhone?.editText?.text.toString().trim()
         if (phone.isEmpty()) {
             txtPhone?.error = getString(R.string.required_error)
@@ -395,7 +464,7 @@ class AddNewBooking : AppCompatActivity() {
         }
     }
 
-    private fun validateEmail(txtEmail: TextInputLayout): Boolean {
+    private fun validateEmail(): Boolean {
         email = txtEmail?.editText?.text.toString().trim()
         if (email.isEmpty()) {
             txtEmail?.error = getString(R.string.required_error)
@@ -406,20 +475,20 @@ class AddNewBooking : AppCompatActivity() {
         }
     }
 
-    private fun validateOtherGuest(txtOthers: TextInputLayout): Boolean {
-        other = txtOthers?.editText?.text.toString().trim()
+    private fun validateOtherGuest(): Boolean {
+        other = txtOtherGuest?.editText?.text.toString().trim()
         val otherGuestList: List<String> = other.split(",").map { it -> it.trim() }
         otherGuestList.forEach { it ->
             println(it)
         }
         if (other.isEmpty() && numOfGuest > 1) {
-            txtOthers?.error = getString(R.string.required_error)
+            txtOtherGuest?.error = getString(R.string.required_error)
             return false
         } else if (otherGuestList.size != (numOfGuest - 1) && numOfGuest > 1) {
-            txtOthers?.error = getString(R.string.other_guest_error)
+            txtOtherGuest?.error = getString(R.string.other_guest_error)
             return false
         } else {
-            txtOthers?.error = ""
+            txtOtherGuest?.error = ""
             return true
         }
     }
@@ -431,12 +500,12 @@ class AddNewBooking : AppCompatActivity() {
             assignCustDetails()
         }
         var available = true
-        var validEmail = validateEmail(txtEmail)
-        var validFirstName = validateFirstName(txtFirstName)
-        var validIC = validateIC(txtIC)
-        var validLastName = validateLastName(txtLastName)
-        var validOtherGuest = validateOtherGuest(txtOtherGuest)
-        var validPhone = validatePhone(txtPhone)
+        var validEmail = validateEmail()
+        var validFirstName = validateFirstName()
+        var validIC = validateIC()
+        var validLastName = validateLastName()
+        var validOtherGuest = validateOtherGuest()
+        var validPhone = validatePhone()
         var validFrom = validateFromDate()
         var validTo = validateToDate()
 

@@ -20,8 +20,7 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
             false)
         val btnBooking = view?.findViewById<ImageButton>(R.id.btnBooking)
         txtName = view?.findViewById(R.id.txtName)
-
-        readName()
+        txtName.text = MyApplication.name
 
         if (btnBooking != null) {
             btnBooking.setOnClickListener(){
@@ -54,11 +53,4 @@ class home_menu_staff : Fragment(R.layout.fragment_home_menu_staff) {
         return view
     }
 
-    private fun readName(){
-        val database = FirebaseDatabase.getInstance()
-        val auth = FirebaseAuth.getInstance()
-        database.getReference("Users").child(auth.uid.toString()).get().addOnSuccessListener {
-            txtName.text = it.child("name").value.toString()
-        }
-    }
 }

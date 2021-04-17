@@ -1,15 +1,12 @@
 package com.example.goldenbeachhotelmanagementsystem
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,15 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.goldenbeachhoteladapters.BookingRecyclerAdapter
 import com.example.goldenbeachhoteldataclasses.DataClassBookingItem
 import com.example.helperclasses.Helper
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Booking : AppCompatActivity() {
@@ -38,7 +31,6 @@ class Booking : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var svBooking: SearchView
-    private var resume = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +51,6 @@ class Booking : AppCompatActivity() {
 
         rvBooking = findViewById(R.id.rvBooking)
 
-        initRecycleView()
         val layoutManager = LinearLayoutManager(this)
         rvBooking.layoutManager = layoutManager
         rvBooking.addItemDecoration(
@@ -101,10 +92,8 @@ class Booking : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if(resume >0){
-            initRecycleView()
-        }
-        resume ++
+        initRecycleView()
+
     }
 
     private fun showSortDialog() {
@@ -117,9 +106,19 @@ class Booking : AppCompatActivity() {
 
             setItems(sortOptions) { _, which ->
                 if (which == 0) {
-                    bookingList.sortByDescending { SimpleDateFormat("ddMMyyyy").parse(it.fromTo.toString().substring(0,8)).time}
+                    bookingList.sortByDescending { SimpleDateFormat("ddMMyyyy").parse(
+                        it.fromTo.toString().substring(
+                            0,
+                            8
+                        )
+                    ).time}
                 } else {
-                    bookingList.sortBy {SimpleDateFormat("ddMMyyyy").parse(it.fromTo.toString().substring(0,8)).time}
+                    bookingList.sortBy {SimpleDateFormat("ddMMyyyy").parse(
+                        it.fromTo.toString().substring(
+                            0,
+                            8
+                        )
+                    ).time}
                 }
                 sortAdapter = BookingRecyclerAdapter(this@Booking, bookingList)
                 rvBooking.adapter = sortAdapter
@@ -163,7 +162,7 @@ class Booking : AppCompatActivity() {
                                 val fromTo =
                                     dateSnapshot.key.toString() + "-" + child.child("to").value.toString()
                                 val booking = DataClassBookingItem(
-                                    fromTo, bookingDate, "",custID,bookingID,type
+                                    fromTo, bookingDate, "", custID, bookingID, type
                                 )
                                 var cusRef = database.getReference("Customers")
                                 cusRef.addValueEventListener(object : ValueEventListener {
@@ -205,8 +204,6 @@ class Booking : AppCompatActivity() {
 
         })
     }
-
-
 
 
 }

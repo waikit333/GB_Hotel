@@ -25,10 +25,10 @@ class Home : AppCompatActivity() {
     private lateinit var homeNavView: NavigationView
     private var helper = Helper()
     private lateinit var bottomNav:BottomNavigationView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
+
 
         //Navigation Drawer
         toolbar = findViewById(R.id.toolbar)
@@ -53,35 +53,42 @@ class Home : AppCompatActivity() {
                 R.id.nav_booking -> {
                     val intent = Intent(this, Booking::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_addNewbooking -> {
                     fabOnClick(findViewById(R.id.fabAddBooking))
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_checkInOut -> {
                     val intent = Intent(this, CheckInCheckOutMenu::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_checkIn -> {
                     val intent = Intent(this, CheckIns::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_checkOut -> {
                     val intent = Intent(this, CheckIns::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_roomManagement -> {
                     val intent = Intent(this, RoomManagement::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.nav_roomService -> {
                     val intent = Intent(this, RoomService::class.java)
                     startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> false
@@ -97,11 +104,6 @@ class Home : AppCompatActivity() {
             getString(R.string.hotel_name)
         )
 
-        var type: String? = ""
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            type = bundle.getString("type")
-        }
         replaceFragment(null)
 
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomAppBarNav)
@@ -122,6 +124,8 @@ class Home : AppCompatActivity() {
             when(it.itemId){
                 R.id.logout -> {
                     FirebaseAuth.getInstance().signOut()
+                    MyApplication.name = ""
+                    MyApplication.count = 0
                     val intent = Intent(this, Login::class.java)
                     startActivity(intent)
                     true
@@ -131,6 +135,7 @@ class Home : AppCompatActivity() {
         }
 
     }
+
 
     fun fabOnClick(v: View) {
         val intent = Intent(this, AddNewBooking::class.java)
@@ -163,7 +168,11 @@ class Home : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        if(MyApplication.count == 0){
+            MyApplication.name = intent.getStringExtra("name").toString()
+        }
         replaceFragment(null)
+        MyApplication.count++
     }
 
     private fun replaceFragment(fragment: Fragment?) {
@@ -176,14 +185,12 @@ class Home : AppCompatActivity() {
                 if(type == "Manager"){
                     val fragment = home_menu_manager()
                     val transaction = manager.beginTransaction()
-                    fragment.arguments = intent.extras
                     transaction.replace(R.id.homeView, fragment)
                     transaction.commit()
                 }
                 else{
                     val fragment = home_menu_staff()
                     val transaction = manager.beginTransaction()
-                    fragment.arguments = intent.extras
                     transaction.replace(R.id.homeView, fragment)
                     transaction.commit()
                 }
@@ -191,8 +198,7 @@ class Home : AppCompatActivity() {
         }
         else{
             val transaction = manager.beginTransaction()
-            fragment.arguments = intent.extras
-            transaction.replace(R.id.homeView, fragment,"MY_FRAGMENT").addToBackStack("MY_FRAGMENT").commit();
+            transaction.replace(R.id.homeView, fragment, "MY_FRAGMENT").addToBackStack("MY_FRAGMENT").commit();
         }
     }
 

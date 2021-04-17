@@ -5,19 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         val btn = findViewById<Button>(R.id.btnLogin)
-
     }
 
-    fun btnLoginOnClick(v: View){
+    fun btnLoginOnClick(v: View) {
         val loading = findViewById<ProgressBar>(R.id.loading)
         val txtEmail = findViewById<EditText>(R.id.txtLoginEmail)
         val txtPassword = findViewById<TextView>(R.id.txtPassword)
@@ -25,23 +23,33 @@ class Login : AppCompatActivity() {
         val password = txtPassword.text.toString().trim()
         val auth = FirebaseAuth.getInstance()
 
-        if (email.isNullOrEmpty()){
+        if (email.isNullOrEmpty()) {
             txtEmail.error = "Email is required"
         }
-        if (password.isNullOrEmpty()){
+        if (password.isNullOrEmpty()) {
             txtEmail.error = "Password is required"
         }
-        if(!email.isNullOrEmpty() && !password.isNullOrEmpty()){
+        if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
             loading.visibility = View.VISIBLE
-            auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this){ task ->
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT)
                     val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
-                    finish()
+                    val database = FirebaseDatabase.getInstance()
+                    val auth = FirebaseAuth.getInstance()
+                    database.getReference("Users").child(auth.uid.toString()).get()
+                        .addOnSuccessListener {
+                            intent.putExtra("name",it.child("name").value.toString())
+                            startActivity(intent)
+                            finish()
+                        }
                 } else {
                     loading.visibility = View.INVISIBLE
-                    Toast.makeText(baseContext, "Login failed. Please ensure that you enter the correct email and password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        "Login failed. Please ensure that you enter the correct email and password",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

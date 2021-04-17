@@ -43,13 +43,13 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"/>
                 <TextView
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtFirstName"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="80dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     app:errorEnabled="true"
                     android:textSize="20dp"
                     android:textAppearance="@style/palaBoldBrownText"/>
@@ -65,14 +65,14 @@
                     android:layout_marginTop="50dp"/>
 
                 <TextView
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtLastName"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="80dp"
                     app:errorEnabled="true"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/details_txtFirstName"
                     android:textAppearance="@style/palaBoldBrownText"/>
@@ -86,10 +86,10 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="130dp"/>
                 <TextView
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtIC"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="170dp"
@@ -108,13 +108,13 @@
                     android:layout_marginTop="130dp"/>
 
                 <TextView
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtPhone"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="170dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     app:errorEnabled="true"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/details_txtFirstName"
@@ -126,18 +126,18 @@
                     android:text="@string/email"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="220dp"/>
                 <TextView
-                    android:layout_width="360dp"
-                    android:layout_height="40dp"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtEmail"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="260dp"
                     android:textSize="20dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:textAppearance="@style/palaBoldBrownText"/>
 
                 <TextView
@@ -164,14 +164,14 @@
                 <TextView
                     android:id="@+id/details_roomID"
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="370dp"
+                    android:layout_marginTop="380dp"
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/lblRoomID"
-                    android:textAlignment="center"/>
+                    android:textAlignment="viewStart"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,13 +186,13 @@
                 <TextView
                     android:id="@+id/details_bookingDate"
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="460dp"
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="viewStart"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -208,8 +208,8 @@
                 <TextView
                     android:id="@+id/details_txtStatus"
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="460dp"
                     android:background="@drawable/text_view_style"
@@ -227,8 +227,8 @@
                 <TextView
                     android:id="@+id/details_txtTypeOfRoom"
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
                     android:layout_marginTop="550dp"
                     android:background="@drawable/text_view_style"
                     android:layout_marginStart="10dp"
@@ -246,9 +246,9 @@
                 <TextView
                     android:id="@+id/details_txtNumOfGuest"
                     android:layout_width="100dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="550dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:layout_marginStart="40dp"
                     android:layout_toEndOf="@+id/details_txtTypeOfRoom"
                     android:background="@drawable/text_view_style"
@@ -278,8 +278,8 @@
                 <TextView
                     android:id="@+id/details_txtfromDate"
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="640dp"
                     android:textAppearance="@style/palaBoldBrownText"
@@ -289,11 +289,11 @@
 
                 <TextView
                     android:layout_width="140dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtToDate"
                     android:layout_marginTop="640dp"
                     android:layout_marginStart="40dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:layout_toEndOf="@+id/details_txtTypeOfRoom"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:background="@drawable/text_view_style"
@@ -310,10 +310,10 @@
 
                 <TextView
                     android:id="@+id/details_txtOthers"
-                    android:layout_width="360dp"
+                    android:layout_width="320dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="10dp"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:layout_marginTop="730dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
@@ -335,19 +335,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total"
                     android:layout_marginTop="840dp"
-                    android:layout_marginStart="90dp"
+                    android:layout_marginStart="70dp"
                     android:layout_toEndOf="@+id/details_cbxMeal"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"/>
 
                 <TextView
                     android:layout_width="120dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/details_txtTotal"
                     android:background="@drawable/text_view_style"
                     android:layout_marginTop="870dp"
-                    android:textAlignment="center"
-                    android:layout_marginStart="90dp"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="70dp"
                     android:layout_toEndOf="@+id/details_cbxMeal"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"/>
@@ -356,7 +356,7 @@
                     android:id="@+id/btnCancelBooking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
+                    android:layout_marginStart="70dp"
                     android:layout_marginTop="920dp"
                     android:layout_toEndOf="@+id/details_cbxMeal"
                     android:backgroundTint="@color/button_color_green"
