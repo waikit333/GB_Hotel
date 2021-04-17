@@ -40,14 +40,14 @@
                     android:text="@string/first_name"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="50dp"/>
                 <TextView
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/details_txtFirstName"
                     android:background="@drawable/text_view_style"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="80dp"
                     android:textAlignment="viewStart"
                     app:errorEnabled="true"
@@ -83,7 +83,7 @@
                     android:text="@string/ic"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="130dp"/>
                 <TextView
                     android:layout_width="140dp"
@@ -91,7 +91,7 @@
                     android:id="@+id/details_txtIC"
                     android:textAlignment="viewStart"
                     android:background="@drawable/text_view_style"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="170dp"
                     app:errorEnabled="true"
                     android:textSize="20dp"
@@ -127,14 +127,14 @@
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
                     android:textAlignment="viewStart"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="220dp"/>
                 <TextView
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/details_txtEmail"
                     android:background="@drawable/text_view_style"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="260dp"
                     android:textSize="20dp"
                     android:textAlignment="viewStart"
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/room"
                     android:layout_marginTop="380dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
                     android:id="@+id/lblRoomID"
@@ -171,14 +171,14 @@
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/lblRoomID"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/booking_date"
                     android:layout_marginTop="430dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
                     />
@@ -187,7 +187,7 @@
                     android:id="@+id/details_bookingDate"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="460dp"
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBoldBrownText"
@@ -221,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/type_of_room"
                     android:layout_marginTop="520dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"/>
                 <TextView
@@ -231,7 +231,7 @@
                     android:textAlignment="viewStart"
                     android:layout_marginTop="550dp"
                     android:background="@drawable/text_view_style"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"/>
 
                 <TextView
@@ -245,10 +245,10 @@
                     android:textSize="20dp"/>
                 <TextView
                     android:id="@+id/details_txtNumOfGuest"
-                    android:layout_width="100dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="550dp"
-                    android:textAlignment="viewStart"
+                    android:textAlignment="center"
                     android:layout_marginStart="40dp"
                     android:layout_toEndOf="@+id/details_txtTypeOfRoom"
                     android:background="@drawable/text_view_style"
@@ -260,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/from"
                     android:layout_marginTop="610dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"/>
 
@@ -280,7 +280,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:textAlignment="viewStart"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="640dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp"
@@ -304,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/other_guest"
                     android:layout_marginTop="700dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:textSize="20dp" />
 
@@ -312,7 +312,7 @@
                     android:id="@+id/details_txtOthers"
                     android:layout_width="320dp"
                     android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textAlignment="viewStart"
                     android:layout_marginTop="730dp"
                     android:textAppearance="@style/palaBoldBrownText"
@@ -325,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="840dp"
                     android:text="@string/hotel_meals"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:id="@+id/details_cbxMeal"
                     android:textAppearance="@style/palaBoldBrownText"
                     android:enabled="false"
@@ -333,31 +333,72 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/total"
-                    android:layout_marginTop="840dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_toEndOf="@+id/details_cbxMeal"
+                    android:text="@string/totalRoom"
+                    android:layout_marginTop="890dp"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/lbltotalRoom"
                     android:textAppearance="@style/palaBoldBrownText"
-                    android:textSize="20dp"/>
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/details_txtTotalRoom"
+                    android:background="@drawable/text_view_style"
+                    android:layout_marginTop="890dp"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/lbltotalRS"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/totalRoomService"
+                    android:layout_marginTop="920dp"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/lbltotalRS"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/details_txtTotalRs"
+                    android:background="@drawable/text_view_style"
+                    android:layout_marginTop="920dp"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/lbltotalRS"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="950dp"
+                    android:text="@string/total"
+                    android:textAppearance="@style/palaBoldBrownText"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/details_txtTotal"
                     android:background="@drawable/text_view_style"
-                    android:layout_marginTop="870dp"
+                    android:layout_marginTop="950dp"
                     android:textAlignment="viewStart"
-                    android:layout_marginStart="70dp"
-                    android:layout_toEndOf="@+id/details_cbxMeal"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/lbltotalRS"
                     android:textAppearance="@style/palaBoldBrownText"
-                    android:textSize="20dp"/>
-
+                    android:textSize="18dp"/>
                 <Button
                     android:id="@+id/btnCancelBooking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="70dp"
-                    android:layout_marginTop="920dp"
+                    android:layout_marginTop="980dp"
                     android:layout_toEndOf="@+id/details_cbxMeal"
                     android:backgroundTint="@color/button_color_green"
                     android:text="@string/cancel_booking"

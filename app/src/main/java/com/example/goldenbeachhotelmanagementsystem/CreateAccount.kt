@@ -389,7 +389,6 @@ class CreateAccount : AppCompatActivity() {
                             }
                         progressBar.visibility = View.INVISIBLE
                         MyApplication.name = firstName + " " + lastName
-                        MyApplication.count = 0
                         finish()
                     } else {
                         Toast.makeText(
