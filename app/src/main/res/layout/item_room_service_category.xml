@@ -6,31 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginHorizontal="20dp"
     android:layout_margin="10dp"
     android:padding="5dp"
     android:gravity="start"
-    android:background="@color/item_background_yellow"
-
+    android:background="@drawable/item_background"
     >
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/bookingsidemenu"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/categoryimage" />
-
     <TextView
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="15dp"
-        android:padding="10dp"
+        android:layout_marginHorizontal="20dp"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/text_view_grey"
         tools:text="Item Name" />
 
 </LinearLayout>
