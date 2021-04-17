@@ -542,7 +542,6 @@ class AddNewBooking : AppCompatActivity() {
         readPrice()
 
         var booking = DataClassBooking(
-            fromDate,
             cbxMeal.isChecked,
             numOfGuest,
             toDate,

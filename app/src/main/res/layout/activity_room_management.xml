@@ -53,6 +53,7 @@
                         android:layout_width="128dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/dropdown_style"
                         app:layout_constraintStart_toEndOf="@+id/textView"
                         app:layout_constraintTop_toTopOf="@+id/include" />
@@ -927,7 +928,6 @@
                             android:id="@+id/txtRoomService"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:layout_marginTop="10dp"
                             android:textAppearance="@style/palaBoldBrownText"
                             android:textSize="20dp"

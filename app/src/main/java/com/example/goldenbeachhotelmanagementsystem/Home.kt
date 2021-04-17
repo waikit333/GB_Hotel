@@ -40,10 +40,14 @@ class Home : AppCompatActivity() {
             when (it.itemId) {
                 R.id.nav_home -> {
                     replaceFragment(null)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    bottomNav.setSelectedItemId(R.id.home)
                     true
                 }
                 R.id.nav_profile -> {
                     replaceFragment(Profile())
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    bottomNav.setSelectedItemId(R.id.profile)
                     true
                 }
                 R.id.nav_booking -> {
@@ -127,7 +131,6 @@ class Home : AppCompatActivity() {
         }
 
     }
-
 
     fun fabOnClick(v: View) {
         val intent = Intent(this, AddNewBooking::class.java)
