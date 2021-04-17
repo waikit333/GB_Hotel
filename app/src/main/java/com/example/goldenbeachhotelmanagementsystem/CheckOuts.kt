@@ -79,7 +79,7 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
                             var periodOfStay: Int
 
                             if (toDate == curDate) {
-                                val startDateString = booking.child("bookingDate").value.toString()
+                                val startDateString = date.key.toString()
                                 val endDateString = booking.child("to").value.toString()
                                 val startDate = SimpleDateFormat("ddMMyyyy").parse(startDateString)
                                 val endDate = SimpleDateFormat("ddMMyyyy").parse(endDateString)
@@ -87,7 +87,7 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
                                 periodOfStay = java.util.concurrent.TimeUnit.DAYS.convert(
                                     diff,
                                     java.util.concurrent.TimeUnit.MILLISECONDS
-                                ).toInt() + 1
+                                ).toInt()
 
                                 database.getReference("Customers").child(custID).get()
                                     .addOnSuccessListener {

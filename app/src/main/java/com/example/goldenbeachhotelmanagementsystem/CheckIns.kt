@@ -77,12 +77,11 @@ class CheckIns : AppCompatActivity() , DialogInterface.OnDismissListener {
                         var custName: String
                         var periodOfStay : Int
 
-                        val startDateString = booking.child("bookingDate").value.toString()
                         val endDateString = booking.child("to").value.toString()
-                        val startDate = SimpleDateFormat("ddMMyyyy").parse(startDateString)
+                        val startDate = SimpleDateFormat("ddMMyyyy").parse(curDate)
                         val endDate = SimpleDateFormat("ddMMyyyy").parse(endDateString)
                         val diff: Long = endDate.getTime() - startDate.getTime()
-                        periodOfStay = java.util.concurrent.TimeUnit.DAYS.convert(diff,java.util.concurrent.TimeUnit.MILLISECONDS).toInt() + 1
+                        periodOfStay = java.util.concurrent.TimeUnit.DAYS.convert(diff,java.util.concurrent.TimeUnit.MILLISECONDS).toInt()
 
                         database.getReference("Customers").child(custID).get().addOnSuccessListener {
                             custName = it.child("firstName").value.toString() + " " + it.child("lastName").value.toString()
