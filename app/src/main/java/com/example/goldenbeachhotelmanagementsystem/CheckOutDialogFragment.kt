@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.example.goldenbeachhoteldataclasses.DataClassBooking
 import com.google.firebase.database.FirebaseDatabase
 import kotlin.math.floor
 
@@ -56,9 +57,13 @@ class CheckOutDialogFragment : DialogFragment() {
                     .child("status").setValue("Available")
 
                 database.getReference("Bookings").child(fromDate).child(roomType).child(custID)
-                    .child(bookingID).child("status").setValue("Checked Out")
-
-                this.dismiss()
+                    .child(bookingID).get().addOnSuccessListener {
+                        val booking = it.getValue(DataClassBooking::class.java)
+                        booking!!.status = "Checked Out"
+                        database.getReference("Bookings").child(fromDate).child(roomType).child(custID)
+                            .child(bookingID).setValue(booking)
+                        this.dismiss()
+                    }
             }
         }
         return view

@@ -8,8 +8,7 @@
     <color name="header_background_gold">#D9DAA520</color>
     <color name="selected_button_red">#E13737</color>
     <color name="item_background_yellow">#EEF0D4</color>
-    <color name="text_color_brown">#422B2B</color>
+    <color name="text_color_brown">#151313</color>
     <color name="button_color_green">#A61B8F2E</color>
-    <color name="text_view_grey">#C1C1C1</color>
-
+    <color name="text_view_grey">#DADADA</color>
 </resources>

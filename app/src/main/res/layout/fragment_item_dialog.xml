@@ -4,15 +4,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/item_background_yellow"
+    android:background="@drawable/item_background"
     android:orientation="vertical"
     android:padding="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/order_menu"
-        android:textSize="24sp"
+        android:text="Order Item"
+        android:textSize="28sp"
         android:layout_marginBottom="10dp"/>
 
     <TextView
@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Item Name" />
+        android:textStyle="bold"
+        tools:text="Item Name" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -78,7 +79,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -91,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
             />
         <TextView
             android:id="@+id/roomText"
@@ -116,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
