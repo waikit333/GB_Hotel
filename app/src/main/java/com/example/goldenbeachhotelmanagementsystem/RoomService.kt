@@ -19,6 +19,8 @@ class RoomService : AppCompatActivity() {
         var database : FirebaseDatabase = FirebaseDatabase.getInstance()
         var foodList : MutableList<DataClassRoomServiceCategory> =  mutableListOf()
         var drinkList : MutableList<DataClassRoomServiceCategory> =  mutableListOf()
+
+        //load food
         database.getReference("RoomServiceCategories").child("Food").get().addOnSuccessListener{
             for (i in it.children){
                 val name = i.key
@@ -28,6 +30,7 @@ class RoomService : AppCompatActivity() {
             recyclerView.adapter = RoomServiceCategoryAdapter(this, foodList)
         }
 
+        //load drink
         database.getReference("RoomServiceCategories").child("Drink").get().addOnSuccessListener{
             for (i in it.children){
                 val name = i.key
@@ -36,6 +39,5 @@ class RoomService : AppCompatActivity() {
             val recyclerView = findViewById<RecyclerView>(R.id.drink_categories)
             recyclerView.adapter = RoomServiceCategoryAdapter(this, drinkList)
         }
-
     }
 }
