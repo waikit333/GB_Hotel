@@ -1,8 +1,10 @@
 package com.example.goldenbeachhotelmanagementsystem
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
+import android.icu.util.TimeUnit
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -15,12 +17,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CheckIns : AppCompatActivity() {
+class CheckIns : AppCompatActivity() , DialogInterface.OnDismissListener {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var curDate = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check__ins)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Check In"
 
         //format for textView display
         val currentViewDate = findViewById<View>(R.id.cur_view_check_ins_date) as TextView
@@ -40,7 +46,7 @@ class CheckIns : AppCompatActivity() {
 
         val dpd = DatePickerDialog(this, { view, year, monthOfYear, dayOfMonth ->
             val calendar = Calendar.getInstance()
-            calendar.set(year,monthOfYear,dayOfMonth)
+            calendar.set(year, monthOfYear, dayOfMonth)
             curDate = SimpleDateFormat("ddMMyyyy").format(calendar.time)
             currentViewDate.text = SimpleDateFormat("dd MMMM yyyy").format(calendar.time)
             loadTable()
@@ -57,36 +63,53 @@ class CheckIns : AppCompatActivity() {
     private fun loadTable(){
         val tableLayout = findViewById<TableLayout>(R.id.check_in_table)
 
-        tableLayout.removeAllViews()
-        database.getReference("Bookings").get().addOnSuccessListener { bookings ->
-            var custID: String
-            var custName: String
-            var roomType: String
-            var status: String
-
-            for (room in bookings.child(curDate).children) {
+        database.getReference("Bookings").child(curDate).get().addOnSuccessListener { bookings ->
+            tableLayout.removeAllViews()
+            for (room in bookings.children) {
                 for (customer in room.children) {
                     for (booking in customer.children) {
-                        custID = customer.key.toString()
-                        roomType = room.key.toString()
-                        status = booking.child("status").value.toString()
+                        val custID = customer.key.toString()
+                        val roomType = room.key.toString()
+                        val bookingID = booking.key.toString()
+                        val status = booking.child("status").value.toString()
+                        val roomName = booking.child("room").value.toString()
+                        var custPhone : String
+                        var custName: String
+                        var periodOfStay : Int
+
+                        val startDateString = booking.child("bookingDate").value.toString()
+                        val endDateString = booking.child("to").value.toString()
+                        val startDate = SimpleDateFormat("ddMMyyyy").parse(startDateString)
+                        val endDate = SimpleDateFormat("ddMMyyyy").parse(endDateString)
+                        val diff: Long = endDate.getTime() - startDate.getTime()
+                        periodOfStay = java.util.concurrent.TimeUnit.DAYS.convert(diff,java.util.concurrent.TimeUnit.MILLISECONDS).toInt() + 1
 
                         database.getReference("Customers").child(custID).get().addOnSuccessListener {
                             custName = it.child("firstName").value.toString() + " " + it.child("lastName").value.toString()
+                            custPhone = it.child("phone").value.toString()
 
                             val tableRow = LayoutInflater.from(this).inflate(
                                 R.layout.check_ins_table_row,
                                 null
                             ) as TableRow
                             tableRow.findViewById<TextView>(R.id.custName).text = custName
-                            tableRow.findViewById<TextView>(R.id.roomName).text = roomType
+                            tableRow.findViewById<TextView>(R.id.roomType).text = roomType
+                            tableRow.findViewById<TextView>(R.id.roomName).text = roomName
                             tableRow.findViewById<TextView>(R.id.roomStatus).text = status
-                            tableRow.setOnClickListener{
-                                val dialog = CheckInDialogFragment()
-                                val args = Bundle()
-//                              args.putString("name", item.name)
-//                              dialog.arguments = args
-                                dialog.show(supportFragmentManager, "Name")
+                            if (status == "Booked") {
+                                tableRow.setOnClickListener {
+                                    val dialog = CheckInDialogFragment()
+                                    val args = Bundle()
+                                    args.putString("custID", custID)
+                                    args.putString("curDate", curDate)
+                                    args.putString("custName", custName)
+                                    args.putString("roomType", roomType)
+                                    args.putString("custPhone", custPhone)
+                                    args.putString("bookingID", bookingID)
+                                    args.putInt("periodOfStay", periodOfStay)
+                                    dialog.arguments = args
+                                    dialog.show(supportFragmentManager, "Name")
+                                }
                             }
                             tableLayout.addView(tableRow)
                         }
@@ -94,5 +117,9 @@ class CheckIns : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDismiss(p0: DialogInterface?) {
+            loadTable()
     }
 }

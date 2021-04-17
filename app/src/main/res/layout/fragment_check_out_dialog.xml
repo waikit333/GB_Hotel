@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check In Menu"
+        android:text="Check Out Menu"
         android:textSize="38sp"
         android:layout_margin="5dp"
         android:layout_marginBottom="10dp"/>
@@ -40,6 +40,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Single " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room: " />
+
+        <TextView
+            android:id="@+id/room_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="F1R10 " />
     </LinearLayout>
 
     <LinearLayout
@@ -75,35 +93,22 @@
             android:layout_height="wrap_content"
             tools:text="012-231231232" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        >
+        android:layout_margin="5dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Floor"
-            android:layout_gravity="center_vertical"
-            />
-        <Spinner
-            android:id="@+id/floorSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            />
+            android:text="Total Bill: RM " />
+
         <TextView
-            android:id="@+id/roomText"
+            android:id="@+id/total_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Room: "
-            android:layout_gravity="center_vertical"/>
-        <Spinner
-            android:id="@+id/roomSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            />
+            tools:text="999.99" />
     </LinearLayout>
 
     <LinearLayout
@@ -119,10 +124,10 @@
             />
 
         <Button
-            android:id="@+id/check_in_button"
+            android:id="@+id/check_out_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Check In"
+            android:text="Check Out"
             android:layout_margin="10dp"
             />
     </LinearLayout>

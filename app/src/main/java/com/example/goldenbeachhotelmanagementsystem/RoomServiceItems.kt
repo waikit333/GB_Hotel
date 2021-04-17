@@ -15,6 +15,11 @@ class RoomServiceItems : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_service_items)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Room Service Items"
+
         val categoryName: TextView = findViewById(R.id.heading_category)
         var category = ""
 

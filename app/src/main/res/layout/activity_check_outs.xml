@@ -10,13 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="@string/showing_bookings_for"
+        android:text="Showing check-outs on:"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/cur_view_check_ins_date"
+        android:id="@+id/cur_view_check_outs_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
@@ -32,9 +32,9 @@
         android:layout_margin="24dp"
         android:text="@string/change"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/cur_view_check_ins_date"
+        app:layout_constraintBottom_toBottomOf="@id/cur_view_check_outs_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cur_view_check_ins_date" />
+        app:layout_constraintTop_toTopOf="@id/cur_view_check_outs_date" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/check_in_table_header"
+            android:id="@+id/check_out_table_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/check_in_table_header">
 
             <TableLayout
-                android:id="@+id/check_in_table"
+                android:id="@+id/check_out_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,10 @@ class RoomService : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_service)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Room Service"
+
         var database : FirebaseDatabase = FirebaseDatabase.getInstance()
         var foodList : MutableList<DataClassRoomServiceCategory> =  mutableListOf()
         var drinkList : MutableList<DataClassRoomServiceCategory> =  mutableListOf()

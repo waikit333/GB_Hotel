@@ -78,29 +78,31 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
+        android:layout_margin="5dp"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/floor" />
-
-        <NumberPicker
-            android:id="@+id/floor_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:text="Floor"
+            android:layout_gravity="center_vertical"
             />
-
-        <TextView
+        <Spinner
+            android:id="@+id/floorSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/room" />
-
-        <NumberPicker
-            android:id="@+id/room_picker"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/roomText"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
+            android:text="Room: "
+            android:layout_gravity="center_vertical"/>
+        <Spinner
+            android:id="@+id/roomSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             />
     </LinearLayout>
 

@@ -8,9 +8,13 @@
             android:id="@+id/custName"
             tools:text="Name"
             android:layout_width="0dp"
-            android:layout_weight=".6"
-            android:text="testname"
+            android:layout_weight=".4"
             />
+        <TextView
+            android:id="@+id/roomType"
+            android:layout_weight=".2"
+            android:layout_width="0dp"
+            tools:text="Type" />
         <TextView
             android:id="@+id/roomName"
             android:layout_weight=".2"
