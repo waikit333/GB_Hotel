@@ -107,6 +107,9 @@ class BookingDetails : AppCompatActivity() {
                     txtRoomServiceTotal.text = "RM ${String.format("%.2f", rsTotal)}"
                     txtTotal.text = "RM ${String.format("%.2f", rsTotal + roomTotal.toString().toDouble())}"
                 }
+                else{
+                    txtRoomServiceTotal.text = "RM 0.00"
+                }
             }
         }
     }
