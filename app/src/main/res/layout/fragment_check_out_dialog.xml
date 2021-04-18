@@ -98,6 +98,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room Cost: RM " />
+
+        <TextView
+            android:id="@+id/room_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="999.99" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room Service Cost: RM " />
+
+        <TextView
+            android:id="@+id/room_service_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="999.99" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_width="wrap_content"

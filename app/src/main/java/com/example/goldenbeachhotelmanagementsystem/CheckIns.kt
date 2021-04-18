@@ -20,6 +20,7 @@ import java.util.*
 class CheckIns : AppCompatActivity() , DialogInterface.OnDismissListener {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var curDate = ""
+    var todayDate = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check__ins)
@@ -34,6 +35,7 @@ class CheckIns : AppCompatActivity() , DialogInterface.OnDismissListener {
 
         //format for database query
         curDate = SimpleDateFormat("ddMMyyyy").format(Date())
+        todayDate = curDate
 
         //onclick listener for date change
         val changeButton = findViewById<View>(R.id.change_button) as Button
@@ -95,7 +97,7 @@ class CheckIns : AppCompatActivity() , DialogInterface.OnDismissListener {
                             tableRow.findViewById<TextView>(R.id.roomType).text = roomType
                             tableRow.findViewById<TextView>(R.id.roomName).text = roomName
                             tableRow.findViewById<TextView>(R.id.roomStatus).text = status
-                            if (status == "Booked") {
+                            if (status == "Booked" && curDate == todayDate) {
                                 tableRow.setOnClickListener {
                                     val dialog = CheckInDialogFragment()
                                     val args = Bundle()

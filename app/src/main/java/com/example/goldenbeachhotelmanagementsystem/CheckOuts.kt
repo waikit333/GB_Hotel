@@ -18,6 +18,7 @@ import java.util.*
 class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var curDate = ""
+    var todayDate = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_outs)
@@ -32,6 +33,7 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
 
         //format for database query
         curDate = SimpleDateFormat("ddMMyyyy").format(Date())
+        todayDate = curDate
 
         //onclick listener for date change
         val changeButton = findViewById<View>(R.id.change_button) as Button
@@ -74,6 +76,8 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
                             var toDate = booking.child("to").value.toString()
                             var roomName = booking.child("room").value.toString()
                             var totalBill = booking.child("total").value.toString()
+                            var roomServiceTotal = booking.child("roomServiceTotal").value.toString()
+                            var roomTotal = booking.child("roomTotal").value.toString()
                             var custPhone: String
                             var custName: String
                             var periodOfStay: Int
@@ -109,7 +113,7 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
                                             roomName
                                         tableRow.findViewById<TextView>(R.id.roomStatus).text =
                                             status
-                                        if (status == "Checked In") {
+                                        if (status == "Checked In" && curDate == todayDate ) {
                                             tableRow.setOnClickListener {
                                                 val dialog = CheckOutDialogFragment()
                                                 val args = Bundle()
@@ -121,6 +125,8 @@ class CheckOuts : AppCompatActivity()  , DialogInterface.OnDismissListener{
                                                 args.putString("custPhone", custPhone)
                                                 args.putString("bookingID", bookingID)
                                                 args.putString("total", totalBill)
+                                                args.putString("roomServiceTotal", roomServiceTotal)
+                                                args.putString("roomTotal", roomTotal)
                                                 args.putString("fromDate", fromDate)
                                                 args.putInt("periodOfStay", periodOfStay)
                                                 dialog.arguments = args
