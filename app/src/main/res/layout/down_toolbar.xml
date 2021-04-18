@@ -7,30 +7,6 @@
     android:layout_height="match_parent"
     >
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:backgroundTint="@color/header_background_gold"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="20dp"
-        app:fabCradleVerticalOffset="10dp">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottomAppBarNav"
-            app:background="@android:color/transparent"
-            app:backgroundTint="@color/header_background_gold"
-            app:itemIconTint="@drawable/bnv_tab_item_foreground"
-            app:itemTextColor="@drawable/bnv_tab_item_foreground"
-            app:menu="@menu/bottom_nav_menu"
-            />
-
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddBooking"
         android:layout_width="wrap_content"
@@ -41,5 +17,27 @@
         app:backgroundTint="#FFFFFF"
         app:layout_anchor="@id/bottomAppBar"
         app:tint="@color/text_color_brown" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="20dp"
+        app:fabCradleVerticalOffset="10dp">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomAppBarNav"
+            app:background="@android:color/transparent"
+            app:backgroundTint="@color/header_background_gold"
+            app:itemIconTint="@drawable/bnv_tab_item_foreground"
+            app:itemTextColor="@drawable/bnv_tab_item_foreground"
+            app:menu="@menu/bottom_nav_menu"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

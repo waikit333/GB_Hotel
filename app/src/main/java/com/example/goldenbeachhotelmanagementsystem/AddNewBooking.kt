@@ -19,6 +19,7 @@ import com.example.goldenbeachhoteldataclasses.DataClassCustomer
 import com.example.helperclasses.*
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -345,7 +346,7 @@ class AddNewBooking : AppCompatActivity() {
                                 )
                             }
                         }
-                        if (!isExist){
+                        if (!isExist) {
                             Toast.makeText(
                                 context, "No record found! Please fill in all the customer details",
                                 Toast.LENGTH_LONG
@@ -385,20 +386,13 @@ class AddNewBooking : AppCompatActivity() {
     }
 
     private fun validateToDate(): Boolean {
-        var to: Date? = null
-        var from: Date? = null
-        if (!toDate.isEmpty() && !fromDate.isEmpty()) {
-            to = SimpleDateFormat("ddMMyyyy").parse(toDate)
-            from = SimpleDateFormat("ddMMyyyy").parse(fromDate)
-        }
         if (toDate.isEmpty()) {
             txtBtnTo.text = getString(R.string.required_error)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 txtBtnTo.setTextAppearance(R.style.errorText)
             }
             return false
-        } else if (to?.before(from) == true && !toDate.isEmpty() && !fromDate.isEmpty()) {
-
+        } else if (toDate == fromDate && !toDate.isEmpty() && !fromDate.isEmpty()) {
             txtBtnTo.text = getString(R.string.less_than_from_error)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 txtBtnTo.setTextAppearance(R.style.errorText)
@@ -561,6 +555,7 @@ class AddNewBooking : AppCompatActivity() {
     }
 
     private fun readPrice() {
+        val df = DecimalFormat("###.00")
         var roomRef = database.getReference("Rooms")
         roomRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -570,16 +565,15 @@ class AddNewBooking : AppCompatActivity() {
                     if (roomTotal != null) {
                         if (cbxMeal.isChecked) {
                             roomTotal += (HOTEL_MEAL_PRICE * numOfGuest)
+                            roomTotal = df.format(roomTotal).toDouble()
                         } else {
                             roomTotal =
                                 snapshot.child(type).child("price").getValue(Double::class.java)!!
+                            roomTotal = df.format(roomTotal).toDouble()
                         }
                         txtTotal?.text = "RM " + String.format("%.2f", roomTotal)
                     }
                 } else {
-                    roomTotal = snapshot.child(type).child("price")
-                        .getValue(Double::class.java)!! * (toDate.substring(0, 2)
-                        .toInt() - fromDate.substring(0, 2).toInt())
                     val txtTotal = findViewById<TextView>(R.id.txtTotal)
                     if (roomTotal != null) {
                         if (cbxMeal.isChecked) {
@@ -592,6 +586,7 @@ class AddNewBooking : AppCompatActivity() {
                             val numOfDay = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
                             roomTotal = snapshot.child(type).child("price")
                                 .getValue(Double::class.java)!! * numOfDay
+                            roomTotal = df.format(roomTotal).toDouble()
                         }
                         txtTotal?.text = "RM " + String.format("%.2f", roomTotal)
                     }
