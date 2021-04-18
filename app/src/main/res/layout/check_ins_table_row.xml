@@ -11,15 +11,15 @@
             android:layout_weight=".4"
             />
         <TextView
-            android:id="@+id/roomType"
-            android:layout_weight=".2"
-            android:layout_width="0dp"
-            tools:text="Type" />
-        <TextView
             android:id="@+id/roomName"
             android:layout_weight=".2"
             android:layout_width="0dp"
             tools:text="Room" />
+        <TextView
+            android:id="@+id/roomType"
+            android:layout_weight=".2"
+            android:layout_width="0dp"
+            tools:text="Type" />
         <TextView
             android:id="@+id/roomStatus"
             android:layout_weight=".2"

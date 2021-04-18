@@ -64,13 +64,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".2"
-                android:text="Room Type" />
+                android:text="@string/room" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".2"
-                android:text="@string/room" />
+                android:text="Type" />
 
             <TextView
                 android:layout_width="0dp"

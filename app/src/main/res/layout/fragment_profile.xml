@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="100dp"
     tools:context=".Profile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp"
         android:layout_marginTop="20dp">
-
-
         <androidx.cardview.widget.CardView
             android:layout_width="360dp"
             android:layout_height="wrap_content"
@@ -50,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="140dp"
+                    android:padding="3dp"
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
@@ -74,6 +75,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -97,6 +99,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -118,6 +121,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -141,6 +145,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -162,6 +167,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -183,6 +189,7 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"/>
 
                 <TextView
@@ -205,12 +212,11 @@
                     android:background="@drawable/text_view_style"
                     android:textAppearance="@style/palaBrownText"
                     android:textSize="20dp"
+                    android:padding="3dp"
                     android:textAlignment="viewStart"
                     android:layout_marginBottom="20dp"/>
             </RelativeLayout>
-
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
