@@ -90,14 +90,24 @@ class BookingDetails : AppCompatActivity() {
             }
             val roomTotal = it.child("roomTotal").value
             val total = it.child("total").value
-            val rsTotal = it.child("roomServiceTotal").value
-            txtTotal.text = "RM " +  String.format("%.2f", total.toString().toFloat())
-            txtRoomServiceTotal.text = "RM " +  String.format("%.2f", rsTotal.toString().toFloat())
             txtRoomTotal.text = "RM " +  String.format("%.2f", roomTotal.toString().toFloat())
+            txtTotal.text = "RM " +  String.format("%.2f", total.toString().toFloat())
             txtStatus.text = it.child("status").value.toString()
             txtBookingDate.text = it.child("bookingDate").value.toString()
             cbxMeal.isChecked = it.child("hotelMeal").value.toString().toBoolean()
             txtRoomID.text = it.child("room").value.toString()
+
+            var rsTotal : Double = it.child("roomServiceTotal").value.toString().toDouble()
+            //calculate roomServiceTotal
+            database.getReference("RoomServices").get().addOnSuccessListener { rs ->
+                if (rs.child(bookingID).exists()){
+                    for (item in rs.child(bookingID).children){
+                        rsTotal += item.child("total").value.toString().toDouble()
+                    }
+                    txtRoomServiceTotal.text = "RM ${String.format("%.2f", rsTotal)}"
+                    txtTotal.text = "RM ${String.format("%.2f", rsTotal + roomTotal.toString().toDouble())}"
+                }
+            }
         }
     }
 
