@@ -251,10 +251,10 @@ class AddNewBooking : AppCompatActivity() {
             { _, mYear, mMonth, mDayOfMonth ->
                 toDate = mDayOfMonth.toString().padStart(2, '0') + (mMonth + 1).toString()
                     .padStart(2, '0') + mYear
-                val from = Calendar.getInstance()
                 val to = Calendar.getInstance()
                 to.set(mYear, mMonth, mDayOfMonth)
                 val currentDate = Calendar.getInstance()
+                currentDate.set(year,month,day-1)
                 if (to.before(currentDate)) {
                     txtBtnTo.text = getString(R.string.less_than_today_error)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -290,6 +290,7 @@ class AddNewBooking : AppCompatActivity() {
                 val from = Calendar.getInstance()
                 from.set(mYear, mMonth, mDayOfMonth)
                 val currentDate = Calendar.getInstance()
+                currentDate.set(year,month,day-1)
                 if (from.before(currentDate)) {
                     txtBtnFrom.text = getString(R.string.less_than_today_error)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
