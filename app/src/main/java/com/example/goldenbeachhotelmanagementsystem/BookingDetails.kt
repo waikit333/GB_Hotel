@@ -88,6 +88,7 @@ class BookingDetails : AppCompatActivity() {
             if (!other.isNullOrEmpty()){
                 txtOthers.text = other
             }
+
             val roomTotal = it.child("roomTotal").value
             val total = it.child("total").value
             txtRoomTotal.text = "RM " +  String.format("%.2f", roomTotal.toString().toFloat())
@@ -106,6 +107,9 @@ class BookingDetails : AppCompatActivity() {
                     }
                     txtRoomServiceTotal.text = "RM ${String.format("%.2f", rsTotal)}"
                     txtTotal.text = "RM ${String.format("%.2f", rsTotal + roomTotal.toString().toDouble())}"
+                }
+                else{
+                    txtRoomServiceTotal.text = "RM 0.00"
                 }
             }
         }
