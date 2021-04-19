@@ -187,7 +187,7 @@ class CreateAccount : AppCompatActivity() {
     }
 
     private fun isLetters(string: String): Boolean {
-        return string.all { it.isLetter() }
+        return string.matches("^[ A-Za-z]+\$".toRegex())
     }
 
     private fun validateDob(): Boolean {
